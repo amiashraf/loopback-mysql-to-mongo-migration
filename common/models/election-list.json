@@ -1,0 +1,32 @@
+{
+  "name": "ElectionList",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "oldId": {
+      "type": "number"
+    },
+    "electionNameEng": {
+      "type": "string"
+    },
+    "electionNameBng": {
+      "type": "string"
+    },
+    "electionDetails": {
+      "type": "string"
+    },
+    "electionHistory": {
+      "type": "string"
+    },
+    "electionType": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

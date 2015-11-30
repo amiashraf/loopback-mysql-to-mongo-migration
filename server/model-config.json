@@ -39,5 +39,9 @@
   "Donor": {
     "dataSource": "mongovotebdtest",
     "public": true
+  },
+  "ElectionList": {
+    "dataSource": "mongovotebdtest",
+    "public": true
   }
 }

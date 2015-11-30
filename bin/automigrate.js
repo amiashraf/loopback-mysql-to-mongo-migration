@@ -72,3 +72,109 @@ oldds.discoverAndBuildModels('election_list', {schema: 'votebd_july2015'},
 //  electionDetails: 'সিটি করপোরেশন নির্বাচন',
 //  electionHistory: 'পূর্বে ঢাকা একটি সিটিতেই বিভক্ত ছিল',
 //  electionType: 'CITY-CORP' },
+
+//
+//{
+//  "name": "ElectionList",
+//  "options": {
+//  "idInjection": false,
+//    "mysql": {
+//    "schema": "votebd_july2015",
+//      "table": "election_list"
+//  }
+//},
+//  "properties": {
+//  "id": {
+//    "type": "Number",
+//      "required": true,
+//      "length": null,
+//      "precision": 10,
+//      "scale": 0,
+//      "id": 1,
+//      "mysql": {
+//      "columnName": "id",
+//        "dataType": "int",
+//        "dataLength": null,
+//        "dataPrecision": 10,
+//        "dataScale": 0,
+//        "nullable": "N"
+//    }
+//  },
+//  "electionNameEng": {
+//    "type": "String",
+//      "required": true,
+//      "length": 255,
+//      "precision": null,
+//      "scale": null,
+//      "mysql": {
+//      "columnName": "election_name_eng",
+//        "dataType": "varchar",
+//        "dataLength": 255,
+//        "dataPrecision": null,
+//        "dataScale": null,
+//        "nullable": "N"
+//    }
+//  },
+//  "electionNameBng": {
+//    "type": "String",
+//      "required": true,
+//      "length": 255,
+//      "precision": null,
+//      "scale": null,
+//      "mysql": {
+//      "columnName": "election_name_bng",
+//        "dataType": "varchar",
+//        "dataLength": 255,
+//        "dataPrecision": null,
+//        "dataScale": null,
+//        "nullable": "N"
+//    }
+//  },
+//  "electionDetails": {
+//    "type": "String",
+//      "required": true,
+//      "length": 65535,
+//      "precision": null,
+//      "scale": null,
+//      "mysql": {
+//      "columnName": "election_details",
+//        "dataType": "text",
+//        "dataLength": 65535,
+//        "dataPrecision": null,
+//        "dataScale": null,
+//        "nullable": "N"
+//    }
+//  },
+//  "electionHistory": {
+//    "type": "String",
+//      "required": true,
+//      "length": 65535,
+//      "precision": null,
+//      "scale": null,
+//      "mysql": {
+//      "columnName": "election_history",
+//        "dataType": "text",
+//        "dataLength": 65535,
+//        "dataPrecision": null,
+//        "dataScale": null,
+//        "nullable": "N"
+//    }
+//  },
+//  "electionType": {
+//    "type": "String",
+//      "required": true,
+//      "length": 16,
+//      "precision": null,
+//      "scale": null,
+//      "mysql": {
+//      "columnName": "election_type",
+//        "dataType": "enum",
+//        "dataLength": 16,
+//        "dataPrecision": null,
+//        "dataScale": null,
+//        "nullable": "N"
+//    }
+//  }
+//}
+//}
+//
