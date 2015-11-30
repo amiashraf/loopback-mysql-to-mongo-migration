@@ -17,7 +17,7 @@ oldds.discoverAndBuildModels('election_list', {schema: 'votebd_july2015'},
 
       var count = elections.length;
       elections.forEach(function(election) {
-        app.models.Donor.create(election, function(err, model) {
+        app.models.ElectionList.create(election, function(err, model) {
           if (err) throw err;
 
           console.log('Created:', model);
