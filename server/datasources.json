@@ -12,6 +12,15 @@
     "name": "accountDS",
     "connector": "mongodb"
   },
+  "votebdold": {
+    "host": "localhost",
+    "port": 3306,
+    "database": "votebd_july2015",
+    "username": "root",
+    "password": "root",
+    "name": "votebdold",
+    "connector": "mysql"
+  },
   "mongovotebdtest": {
     "host": "localhost",
     "port": 27017,

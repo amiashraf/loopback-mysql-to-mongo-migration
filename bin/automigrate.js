@@ -2,6 +2,22 @@ var path = require('path');
 
 var app = require(path.resolve(__dirname, '../server/server'));
 var ds = app.datasources.mongovotebdtest;
+var oldds = app.datasources.votebdold;
+
+
+oldds.discoverAndBuildModels('Account', {schema: 'votebd_july2015'},
+  function(err, models) {
+    if (err) throw err;
+
+    models.Account.find(function(err, accounts) {
+      if (err) throw err;
+
+      console.log('Found:', accounts);
+
+      ds.disconnect();
+    });
+  });
+
 ds.automigrate('Donor', function(err) {
   if (err) throw err;
 
