@@ -32,6 +32,10 @@
     "dataSource": "db",
     "public": false
   },
+  "AppModel": {
+    "dataSource": "mongovotebdtest",
+    "public": false
+  },
   "Account": {
     "dataSource": "accountDS",
     "public": true
@@ -43,5 +47,10 @@
   "ElectionList": {
     "dataSource": "mongovotebdtest",
     "public": true
+  },
+  "division": {
+    "dataSource": "mongovotebdtest",
+    "public": true
   }
+
 }

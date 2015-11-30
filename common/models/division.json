@@ -1,0 +1,48 @@
+{
+  "name": "division",
+  "base": "AppModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "oldId": {
+      "type": "number"
+    },
+    "nameEn": {
+      "type": "string",
+      "required": true
+    },
+    "nameBn": {
+      "type": "string",
+      "required": true
+    },
+    "info": {
+      "type": "string"
+    },
+    "createdBy": {
+      "type": "string"
+    },
+    "modifiedBy": {
+      "type": "string"
+    },
+    "isPublished": {
+      "type": "boolean"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "districts": {
+      "type": "hasMany",
+      "model": "district",
+      "foreignKey": "divisionId"
+    },
+    "electionSeats": {
+      "type": "hasMany",
+      "model": "electionSeat",
+      "foreignKey": "divisionId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
