@@ -3,13 +3,13 @@
     "name": "db",
     "connector": "memory"
   },
-  "accountDS": {
+  "mongovotebdtest": {
     "host": "demo.strongloop.com",
     "port": 27017,
-    "database": "demo",
-    "username": "demo",
-    "password": "L00pBack",
-    "name": "accountDS",
+    "database": "votebdtest",
+    "username": "",
+    "password": "",
+    "name": "mongovotebdtest",
     "connector": "mongodb"
   }
 }
