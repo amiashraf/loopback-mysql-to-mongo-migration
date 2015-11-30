@@ -14,10 +14,13 @@ var opts = {
 var Account = ds.buildModelFromInstance('Account', account, opts);
 
 var instance = new Account(account);
-Account.create(instance, function(err, model) {
-  if (err) throw err;
 
-  console.log('Created:', model);
-
-  ds.disconnect();
-});
+console.log(instance);
+//
+//Account.create(instance, function(err, model) {
+//  if (err) throw err;
+//
+//  console.log('Created:', model);
+//
+//  ds.disconnect();
+//});
