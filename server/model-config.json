@@ -35,5 +35,9 @@
   "Account": {
     "dataSource": "accountDS",
     "public": true
+  },
+  "Donor": {
+    "dataSource": "mongovotebdtest",
+    "public": true
   }
 }
