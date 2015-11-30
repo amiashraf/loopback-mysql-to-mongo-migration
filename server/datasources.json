@@ -3,13 +3,22 @@
     "name": "db",
     "connector": "memory"
   },
-  "accountDS": {
-    "host": "demo.strongloop.com",
+  "votebdold": {
+    "host": "localhost",
     "port": 3306,
-    "database": "loopback-example-mysql",
-    "username": "demo",
-    "password": "L00pBack",
-    "name": "accountDS",
+    "database": "votebd_july2015",
+    "username": "root",
+    "password": "root",
+    "name": "votebdold",
     "connector": "mysql"
+  },
+  "votebdtest": {
+    "host": "localhost",
+    "port": 27017,
+    "database": "votebdtest",
+    "username": "",
+    "password": "",
+    "name": "votebdtest",
+    "connector": "mongodb"
   }
 }
