@@ -4,65 +4,37 @@ var app = require(path.resolve(__dirname, '../server/server'));
 var ds = app.datasources.mongovotebdtest;
 var oldds = app.datasources.votebdold;
 
-//var as = oldds.executeSql("select * from election_list");
-//var as = oldds.executeSQL("select * from election_list")
 
-oldds.connector.execute("select * from election_list","",[],function(err,data){
-  console.log(data);
-});
+oldds.discoverAndBuildModels('election_list', {schema: 'votebd_july2015'},
+  function(err, models) {
+    if (err) throw err;
 
-//console.log(as);
+    models.ElectionList.find(function(err, elections) {
+      if (err) throw err;
 
-
-//distinct native query
-//module.exports = function(Job) {
-//  Job.distinctLocations = function(byId, cb){
-//    var ds = Job.dataSource;
-//    var sql = "SELECT DISTINCT location FROM Job";  //here you write your sql query.
-//    ds.connector.execute(sql, byId, function(err, jobs) {
-//      if (err) console.error(err);
-//      cb(err, jobs);
-//    });
-//  };
-//  Job.remoteMethod(
-//    'distinctLocations',
-//    {
-//      http: {verb: 'get'},
-//      description: "Get distinct locations for the jobs.",
-//      returns: {arg: 'locations', type: 'object', root: true}
-//    }
-//  );
-//};
+      console.log('Found:', elections);
 
 
-//oldds.discoverAndBuildModels('election_list', {schema: 'votebd_july2015'},
-//  function(err, models) {
-//    if (err) throw err;
-//
-//    models.ElectionList.find(function(err, elections) {
-//      if (err) throw err;
-//
-//      console.log('Found:', elections);
-//
-//
-//      var count = elections.length;
-//      elections.forEach(function(election) {
-//        app.models.ElectionList.create(election, function(err, model) {
-//          if (err) throw err;
-//
-//          console.log('Created:', model);
-//
-//          count--;
-//          if (count === 0)
-//            ds.disconnect();
-//        });
-//      });
-//
-//
-//
-//      oldds.disconnect();
-//    });
-//  });
+      var count = elections.length;
+      elections.forEach(function(election) {
+        app.models.ElectionList.create(election, function(err, model) {
+          if (err) throw err;
+
+          console.log('Created:', model);
+
+          count--;
+          if (count === 0)
+            ds.disconnect();
+        });
+      });
+
+
+
+      oldds.disconnect();
+    });
+  });
+
+
 
 //ds.automigrate('Donor', function(err) {
 //  if (err) throw err;
