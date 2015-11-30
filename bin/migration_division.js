@@ -20,10 +20,10 @@ var oldds = app.datasources.votebdold;
 //  function(err, models) {
 //    if (err) throw err;
 //
-//    models.DivisionList.find(function(err, elections) {
+//    models.DivisionList.find(function(err, divisions) {
 //      if (err) throw err;
 //
-//      console.log('Found:', elections);
+//      console.log('Found:', divisions);
 //
 //      oldds.disconnect();
 //    });
@@ -33,35 +33,43 @@ var oldds = app.datasources.votebdold;
 
 
 //retreiving data from mysql and push to mongo
-//oldds.discoverAndBuildModels('division_list', {schema: 'votebd_july2015'},
-//  function(err, models) {
-//    if (err) throw err;
-//
-//    models.DivisionList.find(function(err, elections) {
-//      if (err) throw err;
-//
-//      console.log('Found:', elections);
-//
-//
-//      importing to mongo
-//      var count = elections.length;
-//      elections.forEach(function(election) {
-//        app.models.ElectionList.create(election, function(err, model) {
-//          if (err) throw err;
-//
-//          console.log('Created:', model);
-//
-//          count--;
-//          if (count === 0)
-//            ds.disconnect();
-//        });
-//      });
-//
-//
-//
-//      oldds.disconnect();
-//    });
-//  });
+oldds.discoverAndBuildModels('division_list', {schema: 'votebd_july2015'},
+  function(err, models) {
+    if (err) throw err;
+
+    models.DivisionList.find(function(err, divisions) {
+      if (err) throw err;
+
+      console.log('Found:', divisions);
+
+
+      //importing to mongo
+      var count = divisions.length;
+      divisions.forEach(function(division) {
+
+        var divisn = {};
+        divisn.id = division.divisionId;
+        divisn.nameEn = division.divisionName;
+        divisn.nameBn = division.divisionNameBng;
+        divisn.info = division.divisionInfo;
+
+
+        app.models.division.create(divisn, function(err, model) {
+          if (err) throw err;
+
+          console.log('Created:', model);
+
+          count--;
+          if (count === 0)
+            ds.disconnect();
+        });
+      });
+
+
+
+      oldds.disconnect();
+    });
+  });
 
 //////////////////TABLE SCHEMA//////////////////////////////////////
 //division_list scheam
@@ -141,9 +149,9 @@ var oldds = app.datasources.votebdold;
 
 /////////////////////DATA///////////////////////////////////
 //[ { divisionId: 1,
-//  divisionName: 'Dhaka',
-//  divisionNameBng: 'ঢাকা',
-//  divisionInfo: 'বাংলাদেশের রাজধানী' },
+//    divisionName: 'Dhaka',
+//    divisionNameBng: 'ঢাকা',
+//    divisionInfo: 'বাংলাদেশের রাজধানী' },
 //  { divisionId: 2,
 //    divisionName: 'Chittagong',
 //    divisionNameBng: 'চট্টগ্রাম',
