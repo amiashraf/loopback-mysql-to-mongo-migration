@@ -1,0 +1,59 @@
+{
+  "name": "election",
+  "base": "AppModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "oldId": {
+      "type": "number"
+    },
+    "nameEn": {
+      "type": "string",
+      "required": true
+    },
+    "nameBn": {
+      "type": "string",
+      "required": true
+    },
+    "detail": {
+      "type": "string"
+    },
+    "history": {
+      "type": "string"
+    },
+    "electionType": {
+      "type": "string"
+    },
+    "createdBy": {
+      "type": "string"
+    },
+    "modifiedBy": {
+      "type": "string"
+    },
+    "isPublished": {
+      "type": "boolean"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "candidatePosts": {
+      "type": "hasMany",
+      "model": "candidatePost",
+      "foreignKey": "electionId"
+    },
+    "electionSeats": {
+      "type": "hasMany",
+      "model": "electionSeat",
+      "foreignKey": "electionId"
+    },
+    "currentElections": {
+      "type": "hasMany",
+      "model": "currentElection",
+      "foreignKey": "electionId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

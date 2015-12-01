@@ -48,6 +48,10 @@
     "dataSource": "mongovotebdtest",
     "public": true
   },
+  "election": {
+    "dataSource": "mongovotebdtest",
+    "public": true
+  },
   "division": {
     "dataSource": "mongovotebdtest",
     "public": true
