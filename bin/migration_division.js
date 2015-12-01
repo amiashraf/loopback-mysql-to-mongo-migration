@@ -5,7 +5,7 @@ var ds = app.datasources.mongovotebdtest;
 var oldds = app.datasources.votebdold;
 
 
-//showing table structure
+//Step 1: Showing table structure
 //oldds.discoverSchema('division_list', {schema: 'votebd_july2015'}, function(err,schema) {
 //  if (err) throw err;
 //
@@ -15,7 +15,7 @@ var oldds = app.datasources.votebdold;
 //  oldds.disconnect();
 //});
 
-//showing data
+//Step 2: Showing data
 //oldds.discoverAndBuildModels('division_list', {schema: 'votebd_july2015'},
 //  function(err, models) {
 //    if (err) throw err;
@@ -30,9 +30,7 @@ var oldds = app.datasources.votebdold;
 //  });
 
 
-
-
-//retreiving data from mysql and push to mongo
+//Step 3: Retreiving data from mysql and push to mongo
 oldds.discoverAndBuildModels('division_list', {schema: 'votebd_july2015'},
   function(err, models) {
     if (err) throw err;

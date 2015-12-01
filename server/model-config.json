@@ -51,6 +51,11 @@
   "division": {
     "dataSource": "mongovotebdtest",
     "public": true
+  },
+  "district": {
+    "dataSource": "votebdmongo",
+    "public": true
   }
+
 
 }
