@@ -1,7 +1,7 @@
 var path = require('path');
 
 var app = require(path.resolve(__dirname, '../server/server'));
-var ds = app.datasources.mongovotebdtest;
+var ds = app.datasources.votebdmongo;
 var oldds = app.datasources.votebdold;
 
 
@@ -30,46 +30,77 @@ var oldds = app.datasources.votebdold;
 //  });
 
 
-//Step 3: Retreiving data from mysql and push to mongo
-oldds.discoverAndBuildModels('district_list', {schema: 'votebd_july2015'},
-  function(err, models) {
-    if (err) throw err;
+////Step 3: Retreiving data from mysql and push to mongo
+//oldds.discoverAndBuildModels('district_list', {schema: 'votebd_july2015'},
+//  function(err, models) {
+//    if (err) throw err;
+//
+//    models.DistrictList.find(function(err, districts) {
+//      if (err) throw err;
+//
+//      //console.log('Found:', districts);
+//
+//
+//      //importing to mongo
+//      var count = districts.length;
+//      districts.forEach(function(district) {
+//
+//        var distr = {};
+//        distr.oldId = district.slNo;
+//        distr.nameEn = district.districtName;
+//        distr.nameBn = district.districtNameBng;
+//        distr.infoBn = district.districtInfo;
+//        distr.oldDivisionId = district.divisionId;
+//        distr.districtCode = district.districtCode;
+//
+//
+//        app.models.district.create(distr, function(err, model) {
+//          if (err) throw err;
+//
+//          console.log('Created:', model);
+//
+//          count--;
+//          if (count === 0)
+//            ds.disconnect();
+//        });
+//      });
+//
+//
+//
+//      oldds.disconnect();
+//    });
+//  });
 
-    models.DistrictList.find(function(err, districts) {
+
+//now put division objectId to district(districtId)
+  app.models.division.find(function(err, divisions) {
       if (err) throw err;
 
-      console.log('Found:', districts);
+      console.log('Found:', divisions.length);
 
 
       //importing to mongo
-      var count = districts.length;
-      districts.forEach(function(district) {
+    divisions.forEach(function(division) {
 
-        var distr = {};
-        distr.id = district.slNo;
-        distr.nameEn = district.districtName;
-        distr.nameBn = district.districtNameBng;
-        distr.infoBn = district.districtInfo;
-        distr.divisionId = district.divisionId;
-        distr.districtCode = district.districtCode;
+      //console.log(division);
+      var distr = {};
+      distr.divisionId = division.id;
 
+      app.models.district.updateAll({oldDivisionId: division.oldId}, distr, function(errr, info) {
+        if(err)
+          throw errr;
 
-        app.models.district.create(distr, function(err, model) {
-          if (err) throw err;
-
-          console.log('Created:', model);
-
-          count--;
-          if (count === 0)
-            ds.disconnect();
-        });
+        console.log(info);
       });
 
-
-
-      oldds.disconnect();
     });
-  });
+
+      ds.disconnect();
+    });
+
+
+
+
 
 //////////////////TABLE SCHEMA//////////////////////////////////////
 //{

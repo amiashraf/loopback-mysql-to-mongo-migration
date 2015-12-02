@@ -1,7 +1,7 @@
 var path = require('path');
 
 var app = require(path.resolve(__dirname, '../server/server'));
-var ds = app.datasources.mongovotebdtest;
+var ds = app.datasources.votebdmongo;
 var oldds = app.datasources.votebdold;
 
 
@@ -15,7 +15,7 @@ var oldds = app.datasources.votebdold;
 //  oldds.disconnect();
 //});
 
-//Step 2: Showing data
+////Step 2: Showing data
 //oldds.discoverAndBuildModels('election_list', {schema: 'votebd_july2015'},
 //  function(err, models) {
 //    if (err) throw err;
@@ -30,7 +30,7 @@ var oldds = app.datasources.votebdold;
 //  });
 
 
-////Step 3: Retreiving data from mysql and push to mongo
+//Step 3: Retreiving data from mysql and push to mongo
 //oldds.discoverAndBuildModels('election_list', {schema: 'votebd_july2015'},
 //  function(err, models) {
 //    if (err) throw err;
