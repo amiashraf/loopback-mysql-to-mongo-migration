@@ -1,0 +1,145 @@
+{
+  "name": "person",
+  "plural": "persons",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "oldId": {
+      "type": "number"
+    },
+    "oldPoliticalPartyId": {
+      "type": "number"
+    },
+    "personNameEn": {
+      "type": "string"
+    },
+    "personNameBn": {
+      "type": "string"
+    },
+    "genderEn": {
+      "type": "string"
+    },
+    "genderBn": {
+      "type": "string"
+    },
+    "fatherNameEn": {
+      "type": "string"
+    },
+    "fatherNameBn": {
+      "type": "string"
+    },
+    "motherNameEn": {
+      "type": "string"
+    },
+    "motherNameBn": {
+      "type": "string"
+    },
+    "NID": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "pinNumber": {
+      "type": "string"
+    },
+    "husbandWifeNameEn": {
+      "type": "string"
+    },
+    "husbandWifeNameBn": {
+      "type": "string"
+    },
+    "DOB": {
+      "type": "date"
+    },
+    "DobTimestamp": {
+      "type": "number"
+    },
+    "ageBn": {
+      "type": "string"
+    },
+    "birthPlaceDistrictBn": {
+      "type": "string"
+    },
+    "permanentAddressBn": {
+      "type": "string"
+    },
+    "currentAddressBn": {
+      "type": "string"
+    },
+    "contactTelephoneNo": {
+      "type": "string"
+    },
+    "contactMobileNo": {
+      "type": "string"
+    },
+    "contactEmail": {
+      "type": "string"
+    },
+    "maritalStatusEn": {
+      "type": "string"
+    },
+    "profession": {
+      "type": "string"
+    },
+    "currentWorkingPlaceNameBn": {
+      "type": "string"
+    },
+    "currentWorkingPlaceAddressBn": {
+      "type": "string"
+    },
+    "spouseProfessionBn": {
+      "type": "string"
+    },
+    "child": {
+      "type": "object"
+    },
+    "dateOfSubmission": {
+      "type": "string"
+    },
+    "candidateSignature": {
+      "type": "string"
+    },
+    "date": {
+      "type": "string"
+    },
+    "created": {
+      "type": "date"
+    },
+    "createdBy": {
+      "type": "string"
+    },
+    "modifiedBy": {
+      "type": "string"
+    },
+    "modified": {
+      "type": "date"
+    },
+    "isPublished": {
+      "type": "boolean"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "politicalParty": {
+      "type": "belongsTo",
+      "model": "politicalParty",
+      "foreignKey": "politicalPartyId"
+    },
+    "electionSeat": {
+      "type": "belongsTo",
+      "model": "electionSeat",
+      "foreignKey": "electionSeatId"
+    },
+    "candidates": {
+      "type": "hasMany",
+      "model": "candidate",
+      "foreignKey": "personId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

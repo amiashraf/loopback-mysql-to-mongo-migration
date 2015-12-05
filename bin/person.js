@@ -35,7 +35,7 @@ var oldds = app.datasources.votebdold;
 //  function(err, models) {
 //    if (err) throw err;
 //
-//    models.Persons.find({limit:1000, skip:20000},function(err, elections) {
+//    models.Persons.find({limit:1000, skip:17000},function(err, elections) {
 //      if (err) throw err;
 //
 //      //console.log('Found:', elections);

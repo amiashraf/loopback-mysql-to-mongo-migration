@@ -1,5 +1,6 @@
 {
-  "name": "district",
+  "name": "currentElection",
+  "plural": "currentElections",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -9,21 +10,19 @@
     "oldId": {
       "type": "number"
     },
-    "oldDivisionId": {
+    "oldElectionId": {
       "type": "number"
     },
-    "districtCode": {
+    "electionDescBn": {
       "type": "string"
     },
-    "nameEn": {
-      "type": "string",
-      "required": true
+    "electionDate": {
+      "type": "date"
     },
-    "nameBn": {
-      "type": "string",
-      "required": true
+    "electionDateTimestamp": {
+      "type": "number"
     },
-    "infoBn": {
+    "displayType": {
       "type": "string"
     },
     "created": {
@@ -44,20 +43,25 @@
   },
   "validations": [],
   "relations": {
-    "division": {
+    "election": {
       "type": "belongsTo",
-      "model": "division",
-      "foreignKey": "divisionId"
+      "model": "election",
+      "foreignKey": "electionId"
     },
-    "upazillas": {
+    "candidates": {
       "type": "hasMany",
-      "model": "upazilla",
-      "foreignKey": "districtId"
+      "model": "candidate",
+      "foreignKey": "currentElectionId"
     },
     "electionSeats": {
       "type": "hasMany",
       "model": "electionSeat",
-      "foreignKey": "districtId"
+      "foreignKey": "currentElectionId"
+    },
+    "candidatePosts": {
+      "type": "hasMany",
+      "model": "candidatePost",
+      "foreignKey": "currentElectionId"
     }
   },
   "acls": [],

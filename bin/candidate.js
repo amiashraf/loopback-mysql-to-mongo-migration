@@ -1,5 +1,5 @@
 var path = require('path');
-
+var Promise = require("bluebird");
 var app = require(path.resolve(__dirname, '../server/server'));
 var ds = app.datasources.votebdmongo;
 var oldds = app.datasources.votebdold;
@@ -77,22 +77,21 @@ var oldds = app.datasources.votebdold;
 //  });
 
 
-//this part is pending, now we need to do this for all old...Id
-////now put division objectId to district(districtId)
-//  app.models.division.find(function(err, divisions) {
+////now put currentElection objectId to candidate(currentElectionId)
+//  app.models.currentElection.find({skip:30,limit:10},function(err, currentElections) {
 //      if (err) throw err;
 //
-//      console.log('Found:', divisions.length);
-//
+//      console.log('Found:', currentElections.length);
+//      //console.log( currentElections);
 //
 //      //importing to mongo
-//    divisions.forEach(function(division) {
+//    currentElections.forEach(function(currentElection) {
 //
-//      //console.log(division);
+//      console.log(currentElection);
 //      var distr = {};
-//      distr.divisionId = division.id;
+//      distr.currentElectionId = currentElection.id;
 //
-//      app.models.district.updateAll({oldDivisionId: division.oldId}, distr, function(errr, info) {
+//      app.models.candidate.updateAll({oldCurrentElectionId: currentElection.oldId}, distr, function(errr, info) {
 //        if(err)
 //          throw errr;
 //
@@ -106,7 +105,122 @@ var oldds = app.datasources.votebdold;
 
 
 
+//// now put electionSeat objectId to candidate(electionSeatId)
+//  app.models.electionSeat.find({skip:2000,limit:500},function(err, electionSeats) {
+//      if (err) throw err;
+//
+//      console.log('Found:', electionSeats.length);
+//      //console.log( electionSeats);
+//    var count = electionSeats.length;
+//
+//      //importing to mongo
+//    var spreadData = [];
+//    electionSeats.forEach(function(electionSeat) {
+//
+//      console.log("oldElectionSeatId",electionSeat.oldId);
+//      var distr = {};
+//      distr.electionSeatId = electionSeat.id;
+//
+//      app.models.candidate.updateAll({oldElectionSeatId: electionSeat.oldId}, distr, function(errr, info) {
+//        if(err){
+//          console.log("error:",err);
+//          throw errr;
+//        }
+//
+//        console.log("hello",electionSeat.oldId);
+//      });
+//
+//      //count--;
+//      //if (count === 0){
+//      //  console.log("disconnect korte aise;");
+//      //  ds.disconnect();
+//      //}
+//
+//    });
+//
+//
+//    });
 
+
+
+//// now put person objectId to candidate(personId)
+//  app.models.person.find({skip:18275,limit:500},function(err, persons) {
+//      if (err){
+//        console.log("error to find:", err);
+//        throw err;
+//      }
+//
+//      console.log('Found:', persons.length);
+//      //console.log( persons);
+//    var count = persons.length;
+//
+//      //importing to mongo
+//    var spreadData = [];
+//    persons.forEach(function(person) {
+//
+//      console.log("oldPersonId",person.oldId);
+//      var distr = {};
+//      distr.personId = person.id;
+//
+//      app.models.candidate.updateAll({oldPersonId: person.oldId}, distr, function(errr, info) {
+//        if(errr){
+//          console.log("error to update:",err);
+//          throw errr;
+//        }
+//
+//        console.log("updated done oldPersonId",person.oldId);
+//      });
+//
+//      //count--;
+//      //if (count === 0){
+//      //  console.log("disconnect korte aise;");
+//      //  ds.disconnect();
+//      //}
+//
+//    });
+//
+//
+//    });
+
+
+// now put politicalParty objectId to candidate(politicalPartyId)
+  app.models.politicalParty.find({skip:0,limit:500},function(err, politicalParties) {
+      if (err){
+        console.log("error to find:", err);
+        throw err;
+      }
+
+      console.log('Found:', politicalParties.length);
+      //console.log( politicalParties);
+    var count = politicalParties.length;
+
+      //importing to mongo
+    var spreadData = [];
+    politicalParties.forEach(function(politicalParty) {
+
+      console.log("oldPersonId",politicalParty.oldId);
+      var distr = {};
+      distr.politicalPartyId = politicalParty.id;
+
+      app.models.candidate.updateAll({oldPersonId: politicalParty.oldId}, distr, function(errr, info) {
+        if(errr){
+          console.log("error to update:",err);
+          throw errr;
+        }
+
+        console.log("updated done oldPersonId",politicalParty.oldId);
+      });
+
+      //count--;
+      //if (count === 0){
+      //  console.log("disconnect korte aise;");
+      //  ds.disconnect();
+      //}
+
+    });
+
+
+    });
 
 //////////////////TABLE SCHEMA//////////////////////////////////////
 //{

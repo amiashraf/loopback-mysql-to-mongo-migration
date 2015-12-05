@@ -1,14 +1,12 @@
 {
-  "name": "division",
+  "name": "upazilla",
+  "plural": "upazillas",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "oldId": {
-      "type": "number"
-    },
     "nameEn": {
       "type": "string",
       "required": true
@@ -17,7 +15,7 @@
       "type": "string",
       "required": true
     },
-    "info": {
+    "description": {
       "type": "string"
     },
     "created": {
@@ -38,15 +36,20 @@
   },
   "validations": [],
   "relations": {
-    "districts": {
-      "type": "hasMany",
+    "district": {
+      "type": "belongsTo",
       "model": "district",
-      "foreignKey": "divisionId"
+      "foreignKey": "districtId"
+    },
+    "unions": {
+      "type": "hasMany",
+      "model": "union",
+      "foreignKey": "upazillaId"
     },
     "electionSeats": {
       "type": "hasMany",
       "model": "electionSeat",
-      "foreignKey": "divisionId"
+      "foreignKey": "upazillaId"
     }
   },
   "acls": [],

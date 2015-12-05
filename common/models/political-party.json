@@ -34,6 +34,12 @@
     "createdBy": {
       "type": "string"
     },
+    "created": {
+      "type": "date"
+    },
+    "createdBy": {
+      "type": "string"
+    },
     "modifiedBy": {
       "type": "string"
     },

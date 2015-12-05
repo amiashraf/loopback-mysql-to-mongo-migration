@@ -1,5 +1,6 @@
 {
-  "name": "division",
+  "name": "candidatePost",
+  "plural": "candidatePosts",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -9,15 +10,16 @@
     "oldId": {
       "type": "number"
     },
-    "nameEn": {
-      "type": "string",
-      "required": true
+    "oldCurrentElectionId": {
+      "type": "number"
     },
-    "nameBn": {
-      "type": "string",
-      "required": true
+    "postNameEn": {
+      "type": "string"
     },
-    "info": {
+    "postNameBn": {
+      "type": "string"
+    },
+    "postDescResponsibilityBn": {
       "type": "string"
     },
     "created": {
@@ -38,15 +40,15 @@
   },
   "validations": [],
   "relations": {
-    "districts": {
-      "type": "hasMany",
-      "model": "district",
-      "foreignKey": "divisionId"
+    "election": {
+      "type": "belongsTo",
+      "model": "election",
+      "foreignKey": "electionId"
     },
-    "electionSeats": {
-      "type": "hasMany",
-      "model": "electionSeat",
-      "foreignKey": "divisionId"
+    "currentElection": {
+      "type": "belongsTo",
+      "model": "currentElection",
+      "foreignKey": "currentElectionId"
     }
   },
   "acls": [],

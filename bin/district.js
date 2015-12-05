@@ -72,31 +72,31 @@ var oldds = app.datasources.votebdold;
 //  });
 
 
-//now put division objectId to district(districtId)
-  app.models.division.find(function(err, divisions) {
-      if (err) throw err;
-
-      console.log('Found:', divisions.length);
-
-
-      //importing to mongo
-    divisions.forEach(function(division) {
-
-      //console.log(division);
-      var distr = {};
-      distr.divisionId = division.id;
-
-      app.models.district.updateAll({oldDivisionId: division.oldId}, distr, function(errr, info) {
-        if(err)
-          throw errr;
-
-        console.log(info);
-      });
-
-    });
-
-      ds.disconnect();
-    });
+////now put division objectId to district(districtId)
+//  app.models.division.find(function(err, divisions) {
+//      if (err) throw err;
+//
+//      console.log('Found:', divisions.length);
+//
+//
+//      //importing to mongo
+//    divisions.forEach(function(division) {
+//
+//      //console.log(division);
+//      var distr = {};
+//      distr.divisionId = division.id;
+//
+//      app.models.district.updateAll({oldDivisionId: division.oldId}, distr, function(errr, info) {
+//        if(err)
+//          throw errr;
+//
+//        console.log(info);
+//      });
+//
+//    });
+//
+//      ds.disconnect();
+//    });
 
 
 

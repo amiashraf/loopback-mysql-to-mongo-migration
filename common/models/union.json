@@ -1,14 +1,12 @@
 {
-  "name": "division",
+  "name": "union",
+  "plural": "unions",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "oldId": {
-      "type": "number"
-    },
     "nameEn": {
       "type": "string",
       "required": true
@@ -17,7 +15,7 @@
       "type": "string",
       "required": true
     },
-    "info": {
+    "descriptionBn": {
       "type": "string"
     },
     "created": {
@@ -38,15 +36,15 @@
   },
   "validations": [],
   "relations": {
-    "districts": {
-      "type": "hasMany",
-      "model": "district",
-      "foreignKey": "divisionId"
+    "upazilla": {
+      "type": "belongsTo",
+      "model": "upazilla",
+      "foreignKey": "upazillaId"
     },
     "electionSeats": {
       "type": "hasMany",
       "model": "electionSeat",
-      "foreignKey": "divisionId"
+      "foreignKey": "unionId"
     }
   },
   "acls": [],

@@ -1,0 +1,105 @@
+{
+  "name": "electionSeat",
+  "plural": "electionSeats",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "oldId": {
+      "type": "number"
+    },
+    "oldCurrentElectionId": {
+      "type": "number"
+    },
+    "oldDivisionId": {
+      "type": "number"
+    },
+    "oldDistrictId": {
+      "type": "number"
+    },
+    "seatNameEn": {
+      "type": "string"
+    },
+    "seatNameBn": {
+      "type": "string"
+    },
+    "seatNumberBn": {
+      "type": "string"
+    },
+    "enlistedAreaBn": {
+      "type": "string"
+    },
+    "seatInfoBn": {
+      "type": "number"
+    },
+    "totalPeople": {
+      "type": "number"
+    },
+    "totalVoterMale": {
+      "type": "number"
+    },
+    "totalVoterFemale": {
+      "type": "number"
+    },
+    "geoLatLong": {
+      "type": "geopoint"
+    },
+    "created": {
+      "type": "date"
+    },
+    "createdBy": {
+      "type": "string"
+    },
+    "modifiedBy": {
+      "type": "string"
+    },
+    "modified": {
+      "type": "date"
+    },
+    "isPublished": {
+      "type": "boolean"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "election": {
+      "type": "belongsTo",
+      "model": "election",
+      "foreignKey": "electionId"
+    },
+    "division": {
+      "type": "belongsTo",
+      "model": "division",
+      "foreignKey": "divisionId"
+    },
+    "district": {
+      "type": "belongsTo",
+      "model": "district",
+      "foreignKey": "districtId"
+    },
+    "upazilla": {
+      "type": "belongsTo",
+      "model": "upazilla",
+      "foreignKey": "upazillaId"
+    },
+    "union": {
+      "type": "belongsTo",
+      "model": "union",
+      "foreignKey": "unionId"
+    },
+    "people": {
+      "type": "hasMany",
+      "model": "person",
+      "foreignKey": "electionSeatId"
+    },
+    "candidates": {
+      "type": "hasMany",
+      "model": "candidate",
+      "foreignKey": "electionSeatId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

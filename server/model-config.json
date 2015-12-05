@@ -64,9 +64,53 @@
   "dataSource": "mongovotebdtest",
   "public": true
   },
+  "election": {
+    "dataSource": "votebdmongo",
+    "public": true
+  },
+  "division": {
+    "dataSource": "votebdmongo",
+    "public": true
+  },
+  "constitutionalPost": {
+    "dataSource": "votebdmongo",
+    "public": true
+  },
   "politicalParty": {
-  "dataSource": "votebdmongo",
-  "public": true
+    "dataSource": "votebdmongo",
+    "public": true
+  },
+  "candidatePost": {
+    "dataSource": "votebdmongo",
+    "public": true
+  },
+  "district": {
+    "dataSource": "votebdmongo",
+    "public": true
+  },
+  "electionSeat": {
+    "dataSource": "votebdmongo",
+    "public": true
+  },
+  "upazilla": {
+    "dataSource": "votebdmongo",
+    "public": true
+  },
+  "union": {
+    "dataSource": "votebdmongo",
+    "public": true
+  },
+  "person": {
+    "dataSource": "votebdmongo",
+    "public": true
+  },
+  "currentElection": {
+    "dataSource": "votebdmongo",
+    "public": true
+  },
+  "candidate": {
+    "dataSource": "votebdmongo",
+    "public": true
   }
 
 

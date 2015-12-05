@@ -1,0 +1,191 @@
+{
+  "name": "candidate",
+  "plural": "candidates",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "oldId": {
+      "type": "number"
+    },
+    "oldCurrentElectionId": {
+      "type": "number"
+    },
+    "oldElectionSeatId": {
+      "type": "number"
+    },
+    "oldPersonId": {
+      "type": "number"
+    },
+    "oldPoliticalPartyId": {
+      "type": "number"
+    },
+    "oldCandidatePostId": {
+      "type": "number"
+    },
+    "personNameEn": {
+      "type": "string"
+    },
+    "personNameBn": {
+      "type": "string"
+    },
+    "constitutionalPostEn": {
+      "type": "string"
+    },
+    "constitutionalPostBn": {
+      "type": "string"
+    },
+    "candidatePhoto": {
+      "type": "string"
+    },
+    "candidateType": {
+      "type": "string"
+    },
+    "resultType": {
+      "type": "string"
+    },
+    "allienceNameEn": {
+      "type": "string"
+    },
+    "allienceNameBn": {
+      "type": "string"
+    },
+    "electionNameEn": {
+      "type": "string"
+    },
+    "electionNameBn": {
+      "type": "string"
+    },
+    "electionDate": {
+      "type": "date"
+    },
+    "electionDateTimestamp": {
+      "type": "number"
+    },
+    "seatNameEn": {
+      "type": "string"
+    },
+    "seatNameBn": {
+      "type": "string"
+    },
+    "divisionNameEn": {
+      "type": "string"
+    },
+    "divisionNameBn": {
+      "type": "string"
+    },
+    "districtNameEn": {
+      "type": "string"
+    },
+    "districtNameBn": {
+      "type": "string"
+    },
+    "upazillaNameEn": {
+      "type": "string"
+    },
+    "upazillaNameBn": {
+      "type": "string"
+    },
+    "unionNameEn": {
+      "type": "string"
+    },
+    "unionNameBn": {
+      "type": "string"
+    },
+    "wardNameEn": {
+      "type": "string"
+    },
+    "wardNameBn": {
+      "type": "string"
+    },
+    "candidatePostNameEn": {
+      "type": "string"
+    },
+    "candidatePostNameBn": {
+      "type": "string"
+    },
+    "politicalPartyNameEn": {
+      "type": "string"
+    },
+    "politicalPartyNameBn": {
+      "type": "string"
+    },
+    "created": {
+      "type": "date"
+    },
+    "createdBy": {
+      "type": "string"
+    },
+    "modifiedBy": {
+      "type": "string"
+    },
+    "modified": {
+      "type": "date"
+    },
+    "isPublished": {
+      "type": "boolean"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "currentElection": {
+      "type": "belongsTo",
+      "model": "currentElection",
+      "foreignKey": "currentElectionId"
+    },
+    "election": {
+      "type": "belongsTo",
+      "model": "election",
+      "foreignKey": "electionId"
+    },
+    "person": {
+      "type": "belongsTo",
+      "model": "person",
+      "foreignKey": "personId"
+    },
+    "politicalParty": {
+      "type": "belongsTo",
+      "model": "politicalParty",
+      "foreignKey": "politicalPartyId"
+    },
+    "candidatePost": {
+      "type": "belongsTo",
+      "model": "candidatePost",
+      "foreignKey": "candidatePostId"
+    },
+    "constitutionalPost": {
+      "type": "belongsTo",
+      "model": "constitutionalPost",
+      "foreignKey": "constitutionalPostId"
+    },
+    "electionSeat": {
+      "type": "belongsTo",
+      "model": "electionSeat",
+      "foreignKey": "electionSeatId"
+    },
+    "division": {
+      "type": "belongsTo",
+      "model": "division",
+      "foreignKey": "divisionId"
+    },
+    "district": {
+      "type": "belongsTo",
+      "model": "district",
+      "foreignKey": "districtId"
+    },
+    "upazilla": {
+      "type": "belongsTo",
+      "model": "upazilla",
+      "foreignKey": "upazillaId"
+    },
+    "union": {
+      "type": "belongsTo",
+      "model": "union",
+      "foreignKey": "unionId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

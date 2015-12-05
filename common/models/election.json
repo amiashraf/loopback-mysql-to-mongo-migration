@@ -1,6 +1,6 @@
 {
   "name": "election",
-  "base": "AppModel",
+  "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
@@ -26,11 +26,17 @@
     "electionType": {
       "type": "string"
     },
+    "created": {
+      "type": "date"
+    },
     "createdBy": {
       "type": "string"
     },
     "modifiedBy": {
       "type": "string"
+    },
+    "modified": {
+      "type": "date"
     },
     "isPublished": {
       "type": "boolean"

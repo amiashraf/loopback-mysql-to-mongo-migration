@@ -1,23 +1,21 @@
 {
-  "name": "division",
+  "name": "constitutionalPost",
+  "plural": "constitutionalPosts",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "oldId": {
-      "type": "number"
-    },
-    "nameEn": {
+    "constitutionalPostNameEn": {
       "type": "string",
       "required": true
     },
-    "nameBn": {
+    "constitutionalPostNameBn": {
       "type": "string",
       "required": true
     },
-    "info": {
+    "detail": {
       "type": "string"
     },
     "created": {
@@ -37,18 +35,7 @@
     }
   },
   "validations": [],
-  "relations": {
-    "districts": {
-      "type": "hasMany",
-      "model": "district",
-      "foreignKey": "divisionId"
-    },
-    "electionSeats": {
-      "type": "hasMany",
-      "model": "electionSeat",
-      "foreignKey": "divisionId"
-    }
-  },
+  "relations": {},
   "acls": [],
   "methods": {}
 }
