@@ -29,5 +29,14 @@
     "password": "",
     "name": "mongovotebdtest",
     "connector": "mongodb"
+  },
+  "votebdmongo": {
+    "host": "localhost",
+    "port": 27017,
+    "database": "votebd",
+    "username": "",
+    "password": "",
+    "name": "votebdmongo",
+    "connector": "mongodb"
   }
 }

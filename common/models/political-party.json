@@ -1,0 +1,57 @@
+{
+  "name": "politicalParty",
+  "plural": "politicalParties",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "oldId": {
+      "type": "number"
+    },
+    "partyNameEn": {
+      "type": "string"
+    },
+    "partyNameBn": {
+      "type": "string"
+    },
+    "estDate": {
+      "type": "date"
+    },
+    "chairpersonNameBn": {
+      "type": "string"
+    },
+    "gsNameBn": {
+      "type": "string"
+    },
+    "partyConstitutionBn": {
+      "type": "string"
+    },
+    "created": {
+      "type": "date"
+    },
+    "createdBy": {
+      "type": "string"
+    },
+    "modifiedBy": {
+      "type": "string"
+    },
+    "modified": {
+      "type": "date"
+    },
+    "isPublished": {
+      "type": "boolean"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "people": {
+      "type": "hasMany",
+      "model": "person",
+      "foreignKey": "politicalPartyId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

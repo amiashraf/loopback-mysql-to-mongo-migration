@@ -59,6 +59,14 @@
   "district": {
     "dataSource": "mongovotebdtest",
     "public": true
+  },
+  "politicalParty": {
+  "dataSource": "mongovotebdtest",
+  "public": true
+  },
+  "politicalParty": {
+  "dataSource": "votebdmongo",
+  "public": true
   }
 
 
