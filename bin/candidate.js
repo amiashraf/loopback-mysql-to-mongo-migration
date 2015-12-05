@@ -183,32 +183,71 @@ var oldds = app.datasources.votebdold;
 //    });
 
 
-// now put politicalParty objectId to candidate(politicalPartyId)
-  app.models.politicalParty.find({skip:40,limit:10},function(err, politicalParties) {
+//// now put politicalParty objectId to candidate(politicalPartyId)
+//  app.models.politicalParty.find({skip:40,limit:10},function(err, politicalParties) {
+//      if (err){
+//        console.log("error to find:", err);
+//        throw err;
+//      }
+//
+//      console.log('Found:', politicalParties.length);
+//      //console.log( politicalParties);
+//    var count = politicalParties.length;
+//
+//      //importing to mongo
+//    var spreadData = [];
+//    politicalParties.forEach(function(politicalParty) {
+//
+//      console.log("oldPoliticalPartyId",politicalParty.oldId);
+//      var distr = {};
+//      distr.politicalPartyId = politicalParty.id;
+//
+//      app.models.candidate.updateAll({oldPoliticalPartyId: politicalParty.oldId}, distr, function(errr, info) {
+//        if(errr){
+//          console.log("error to update:",err);
+//          throw errr;
+//        }
+//
+//        console.log("updated done oldPoliticalPartyId",politicalParty.oldId);
+//      });
+//
+//      //count--;
+//      //if (count === 0){
+//      //  console.log("disconnect korte aise;");
+//      //  ds.disconnect();
+//      //}
+//
+//    });
+//
+//
+//    });
+
+
+// now put candidatePost objectId to candidate(candidatePostId)
+  app.models.candidatePost.find({skip:400,limit:100},function(err, candidatePosts) {
       if (err){
         console.log("error to find:", err);
         throw err;
       }
 
-      console.log('Found:', politicalParties.length);
-      //console.log( politicalParties);
-    var count = politicalParties.length;
+      console.log('Found:', candidatePosts.length);
+      //console.log( candidatePosts);
+    var count = candidatePosts.length;
 
       //importing to mongo
-    var spreadData = [];
-    politicalParties.forEach(function(politicalParty) {
+    candidatePosts.forEach(function(candidatePost) {
 
-      console.log("oldPoliticalPartyId",politicalParty.oldId);
+      console.log("oldCandidatePostId",candidatePost.oldId);
       var distr = {};
-      distr.politicalPartyId = politicalParty.id;
+      distr.candidatePostId = candidatePost.id;
 
-      app.models.candidate.updateAll({oldPoliticalPartyId: politicalParty.oldId}, distr, function(errr, info) {
+      app.models.candidate.updateAll({oldCandidatePostId: candidatePost.oldId}, distr, function(errr, info) {
         if(errr){
           console.log("error to update:",err);
           throw errr;
         }
 
-        console.log("updated done oldPoliticalPartyId",politicalParty.oldId);
+        console.log("updated done oldCandidatePostId",candidatePost.oldId);
       });
 
       //count--;

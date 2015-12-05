@@ -52,9 +52,14 @@
   },
   "validations": [],
   "relations": {
-    "people": {
+    "peoples": {
       "type": "hasMany",
       "model": "person",
+      "foreignKey": "politicalPartyId"
+    },
+    "candidates": {
+      "type": "hasMany",
+      "model": "candidate",
       "foreignKey": "politicalPartyId"
     }
   },
