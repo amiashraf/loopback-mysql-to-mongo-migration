@@ -1,6 +1,6 @@
 var path = require('path');
-var Promise = require("bluebird");
 var app = require(path.resolve(__dirname, '../server/server'));
+//var ds = app.datasources.mongovotebdtest;
 var ds = app.datasources.votebdmongo;
 var oldds = app.datasources.votebdold;
 
@@ -184,7 +184,7 @@ var oldds = app.datasources.votebdold;
 
 
 // now put politicalParty objectId to candidate(politicalPartyId)
-  app.models.politicalParty.find({skip:0,limit:500},function(err, politicalParties) {
+  app.models.politicalParty.find({skip:40,limit:10},function(err, politicalParties) {
       if (err){
         console.log("error to find:", err);
         throw err;
@@ -198,17 +198,17 @@ var oldds = app.datasources.votebdold;
     var spreadData = [];
     politicalParties.forEach(function(politicalParty) {
 
-      console.log("oldPersonId",politicalParty.oldId);
+      console.log("oldPoliticalPartyId",politicalParty.oldId);
       var distr = {};
       distr.politicalPartyId = politicalParty.id;
 
-      app.models.candidate.updateAll({oldPersonId: politicalParty.oldId}, distr, function(errr, info) {
+      app.models.candidate.updateAll({oldPoliticalPartyId: politicalParty.oldId}, distr, function(errr, info) {
         if(errr){
           console.log("error to update:",err);
           throw errr;
         }
 
-        console.log("updated done oldPersonId",politicalParty.oldId);
+        console.log("updated done oldPoliticalPartyId",politicalParty.oldId);
       });
 
       //count--;
