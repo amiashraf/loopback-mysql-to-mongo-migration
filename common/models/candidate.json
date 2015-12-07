@@ -129,7 +129,150 @@
     },
     "isPublished": {
       "type": "boolean"
+    },
+
+
+
+
+
+
+
+    "candidateNameBnAF": {
+      "type": "string"
+    },
+    "fatherHusbandNameBnAF": {
+      "type": "string"
+    },
+    "addressBnAF": {
+      "type": "string"
+    },
+    "seatInfoBnAF": {
+      "type": "string"
+    },
+    "oldCandidatePostBnAF": {
+      "type": "string"
+    },
+    "highestDegreeBnAF": {
+      "type": "string"
+    },
+    "degreeTypeBnAF": {
+      "type": "string"
+    },
+    "candidateProfessionBusinessBnAF": {
+      "type": "string"
+    },
+    "professionTypeBnAF": {
+      "type": "string"
+    },
+    "submitDateAF": {
+      "type": "date"
+    },
+    "submitDateTimestampAF": {
+      "type": "number"
+    },
+    "identifierNameBnAF": {
+      "type": "string"
+    },
+    "identifierAddressBnAF": {
+      "type": "string"
+    },
+    "ageAtSubmissionDateAF": {
+      "type": "string"
+    },
+    "signatureNotariPublicAF": {
+      "type": "string"
+    },
+    "lastDateAF": {
+      "type": "date"
+    },
+    "dateAF": {
+      "type": "date"
+    },
+    "assetMaterialAF": {
+      "type": "array"
+    },
+    "assetMaterialTotalAF": {
+      "type": "number"
+    },
+    "assetImmaterialAF": {
+      "type": "array"
+    },
+    "assetImmaterialTotalAF": {
+      "type": "number"
+    },
+    "incomeSourceAF": {
+      "type": "array"
+    },
+    "totalOwnIncomeAF": {
+      "type": "number"
+    },
+    "totalDependentIncomeAF": {
+      "type": "number"
+    },
+
+    "liabilitiesDetailsBnAF": {
+      "type": "string"
+    },
+    "liabilitiesAmountAF": {
+      "type": "number"
+    },
+    "noLoansAF": {
+      "type": "boolean"
+    },
+    "loanAF": {
+      "type": "array"
+    },
+
+    "criminalCourtStatusBnAF": {
+      "type": "string"
+    },
+    "presentCriminalCourtStatusAF": {
+      "type": "boolean"
+    },
+    "pastCriminalCourtStatusBnAF": {
+      "type": "string"
+    },
+    "pastCriminalCourtStatusAF": {
+      "type": "boolean"
+    },
+    "lawPresentAF": {
+      "type": "array"
+    },
+    "lawPastAF": {
+      "type": "array"
+    },
+
+    "isPastMpAF": {
+      "type": "boolean"
+    },
+    "commitmentBeforeMpAF": {
+      "type": "array"
+    },
+    "achievementWhileMpAF": {
+      "type": "array"
+    },
+
+    "createdAF": {
+      "type": "date"
+    },
+    "createdByAF": {
+      "type": "date"
+    },
+    "modifiedAF": {
+      "type": "date"
+    },
+    "modifiedByAF": {
+      "type": "date"
+    },
+    "isPublishedAF": {
+      "type": "boolean"
     }
+
+
+
+
+
+
   },
   "validations": [],
   "relations": {

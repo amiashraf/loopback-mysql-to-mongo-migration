@@ -11,6 +11,7 @@ var oldds = app.datasources.votebdold;
 //  { current_election_id: 1, totalEffidevit: 43 },
 //  { current_election_id: 5, totalEffidevit: 986 }]
 
+
 ////////////////////adding profile_id as oldAffidevitId to candidate model ////////////
 //oldds.connector.query("SELECT current_election_id, COUNT(id) as totalEffidevit FROM person2profile WHERE profile_type='EFFIDEVIT' GROUP BY current_election_id limit 29, 1",'',function(err,rows,fields){
 //  if(err){
@@ -49,26 +50,6 @@ var oldds = app.datasources.votebdold;
 //});
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //////////////////Some necessary query//////////////////////////////////////
 
 //SELECT  DISTINCT p.profile_id, p.person_id, p.seat_id as pSeat_id, e.seat_id as cSeat_id, e.id as candidateId   FROM person2profile p, election_candidates e WHERE p.profile_type="EFFIDEVIT" AND p.person_id=e.person_id AND p.current_election_id=e.current_election_id AND p.current_election_id = 5
@@ -76,11 +57,6 @@ var oldds = app.datasources.votebdold;
 
 //find count affidevit against current election
 //SELECT current_election_id, COUNT(id) as totalEffidevit FROM `person2profile` WHERE `profile_type`="EFFIDEVIT" GROUP BY current_election_id
-
-
-
-
-
 
 //finding duplicate election candidate for same current election and person
 //SELECT p.profile_id, COUNT(p.profile_id) as total FROM person2profile p, election_candidates e WHERE p.profile_type="EFFIDEVIT" AND p.person_id=e.person_id AND p.current_election_id=e.current_election_id AND p.current_election_id = 5 GROUP BY p.profile_id
