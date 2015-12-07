@@ -8,6 +8,7 @@
     "test": "tape test/*.js"
   },
   "dependencies": {
+    "bluebird": "^3.0.6",
     "compression": "^1.0.3",
     "cors": "^2.5.2",
     "loopback": "^2.22.0",

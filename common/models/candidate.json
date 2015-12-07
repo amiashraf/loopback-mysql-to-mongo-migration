@@ -25,6 +25,9 @@
     "oldCandidatePostId": {
       "type": "number"
     },
+    "oldAffidevitId": {
+      "type": "number"
+    },
     "personNameEn": {
       "type": "string"
     },

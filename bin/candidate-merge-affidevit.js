@@ -4,164 +4,96 @@ var app = require(path.resolve(__dirname, '../server/server'));
 var ds = app.datasources.votebdmongo;
 var oldds = app.datasources.votebdold;
 
-//
-//oldds.connector.execute("SELECT current_election_id, COUNT(id) as totalEffidevit FROM person2profile WHERE profile_type='EFFIDEVIT' GROUP BY current_election_id",'',function(data){
-//  console.log("data",data);
-//});
 
-oldds.connector.query("SELECT current_election_id, COUNT(id) as totalEffidevit FROM person2profile WHERE profile_type='EFFIDEVIT' GROUP BY current_election_id limit 2 , 1",'',function(err,rows,fields){
-  if(err){
-    console.log(err);
-    throw err;
-  }
-  console.log("data length: ",rows);
+//SELECT current_election_id, COUNT(id) as totalEffidevit FROM person2profile WHERE profile_type='EFFIDEVIT' GROUP BY current_election_id
+/////////////////////SAMPLE DATA///////////////////////////////////
+//[ { current_election_id: null, totalEffidevit: 105 },
+//  { current_election_id: 1, totalEffidevit: 43 },
+//  { current_election_id: 5, totalEffidevit: 986 }]
 
-  console.log("current_election_id: ",rows[0].current_election_id," totalEffidevit: ",rows[0].totalEffidevit);
-
-  oldds.connector.query("SELECT * FROM person2profile WHERE profile_type='EFFIDEVIT' AND current_election_id="+rows[0].current_election_id,'',function(err2,rows2,fields2){
-    if(err2){
-      console.log(err2);
-      throw err2;
-    }
-    console.log("data length 2: ",rows.length);
-
-    oldds.disconnect();
-  });
-
-});
-
-////Step 1: Showing table structure
-//oldds.discoverSchema('election_candidates', {schema: 'votebd_july2015'}, function(err,schema) {
-//  if (err) throw err;
+////////////////////adding profile_id as oldAffidevitId to candidate model ////////////
+//oldds.connector.query("SELECT current_election_id, COUNT(id) as totalEffidevit FROM person2profile WHERE profile_type='EFFIDEVIT' GROUP BY current_election_id limit 29, 1",'',function(err,rows,fields){
+//  if(err){
+//    console.log(err);
+//    throw err;
+//  }
+//  //console.log("data length: ",rows);
 //
-//  var json = JSON.stringify(schema, null, '  ');
-//  console.log(json);
+//  console.log("current_election_id: ",rows[0].current_election_id," totalEffidevit: ",rows[0].totalEffidevit);
 //
-//  oldds.disconnect();
-//});
-
-////Step 2: Showing data
-//oldds.discoverAndBuildModels('election_candidates', {schema: 'votebd_july2015'},
-//  function(err, models) {
-//    if (err) throw err;
+//  oldds.connector.query("SELECT p.profile_id, p.person_id, p.seat_id as pSeat_id, e.seat_id as cSeat_id, e.id as candidateId FROM person2profile p, election_candidates e WHERE p.profile_type='EFFIDEVIT' AND p.person_id=e.person_id AND p.current_election_id=e.current_election_id AND p.current_election_id = "+rows[0].current_election_id,'',function(err2,rows2,fields2){
+//    if(err2){
+//      console.log(err2);
+//      throw err2;
+//    }
+//    console.log("data length (Affidevits): ",rows2.length);
+//    //console.log("data length (Affidevits): ",rows2);
 //
-//    models.ElectionCandidates.find({limit:4},function(err, districts) {
-//      if (err) throw err;
+//    var iter = 1;
+//    rows2.forEach(function(eachRow){
+//      console.log("updating candidate: ",eachRow.candidateId, " ,profileId: ",eachRow.profile_id);
+//      var candidateAffidevit = {};
+//      candidateAffidevit.oldAffidevitId = eachRow.profile_id;
 //
-//      console.log('Found:', districts);
-//
-//      oldds.disconnect();
-//    });
-//  });
-
-
-////Step 3: Retreiving data from mysql and push to mongo
-//oldds.discoverAndBuildModels('election_candidates', {schema: 'votebd_july2015'},
-//  function(err, models) {
-//    if (err) throw err;
-//
-//    models.ElectionCandidates.find(function(err, districts) {
-//      if (err) throw err;
-//
-//      //console.log('Found:', districts);
-//
-//
-//      //importing to mongo
-//      var count = districts.length;
-//      districts.forEach(function(district) {
-//
-//        var distr = {};
-//        distr.oldId = district.id;
-//        distr.oldCurrentElectionId = district.currentElectionId;
-//        distr.oldElectionSeatId = district.seatId;
-//        distr.oldPersonId = district.personId;
-//        distr.oldPoliticalPartyId = district.politicalPartyId;
-//        distr.oldCandidatePostId = district.candidatePost;
-//        distr.constitutionalPostBn = district.constitutionalPost;
-//        distr.wardNameBn = district.wardName;
-//        distr.resultType = district.resultType;
-//        distr.candidateType = district.candidateType;
-//        distr.candidatePhoto = district.photo;
-//
-//
-//        app.models.candidate.create(distr, function(err, model) {
-//          if (err) throw err;
-//
-//          console.log('Created:', model);
-//
-//          count--;
-//          if (count === 0)
-//            ds.disconnect();
-//        });
-//      });
-//
-//
-//
-//      oldds.disconnect();
-//    });
-//  });
-
-
-////now put currentElection objectId to candidate(currentElectionId)
-//  app.models.currentElection.find({skip:30,limit:10},function(err, currentElections) {
-//      if (err) throw err;
-//
-//      console.log('Found:', currentElections.length);
-//      //console.log( currentElections);
-//
-//      //importing to mongo
-//    currentElections.forEach(function(currentElection) {
-//
-//      console.log(currentElection);
-//      var distr = {};
-//      distr.currentElectionId = currentElection.id;
-//
-//      app.models.candidate.updateAll({oldCurrentElectionId: currentElection.oldId}, distr, function(errr, info) {
+//      app.models.candidate.updateAll({oldPersonId: eachRow.person_id,oldId:eachRow.candidateId}, candidateAffidevit, function(errr, info) {
 //        if(err)
 //          throw errr;
 //
-//        console.log(info);
+//        console.log(info, iter++);
 //      });
+//    })
 //
-//    });
+//    //oldds.disconnect();
+//  });
 //
-//      ds.disconnect();
-//    });
+//});
 
 
 
-//////////////////TABLE SCHEMA//////////////////////////////////////
 
 
-/////////////////////DATA///////////////////////////////////
-//[ { current_election_id: null, totalEffidevit: 105 },
-//  { current_election_id: 1, totalEffidevit: 43 },
-//  { current_election_id: 5, totalEffidevit: 986 },
-//  { current_election_id: 6, totalEffidevit: 546 },
-//  { current_election_id: 7, totalEffidevit: 2465 },
-//  { current_election_id: 8, totalEffidevit: 2714 },
-//  { current_election_id: 9, totalEffidevit: 27 },
-//  { current_election_id: 10, totalEffidevit: 420 },
-//  { current_election_id: 11, totalEffidevit: 1564 },
-//  { current_election_id: 13, totalEffidevit: 12 },
-//  { current_election_id: 14, totalEffidevit: 673 },
-//  { current_election_id: 15, totalEffidevit: 473 },
-//  { current_election_id: 17, totalEffidevit: 6 },
-//  { current_election_id: 18, totalEffidevit: 1539 },
-//  { current_election_id: 19, totalEffidevit: 11 },
-//  { current_election_id: 20, totalEffidevit: 2 },
-//  { current_election_id: 21, totalEffidevit: 716 },
-//  { current_election_id: 22, totalEffidevit: 2896 },
-//  { current_election_id: 23, totalEffidevit: 1102 },
-//  { current_election_id: 24, totalEffidevit: 1174 },
-//  { current_election_id: 25, totalEffidevit: 50 },
-//  { current_election_id: 26, totalEffidevit: 1053 },
-//  { current_election_id: 27, totalEffidevit: 5 },
-//  { current_election_id: 28, totalEffidevit: 10 },
-//  { current_election_id: 29, totalEffidevit: 210 },
-//  { current_election_id: 31, totalEffidevit: 2 },
-//  { current_election_id: 32, totalEffidevit: 36 },
-//  { current_election_id: 33, totalEffidevit: 614 },
-//  { current_election_id: 34, totalEffidevit: 756 },
-//  { current_election_id: 35, totalEffidevit: 364 } ]
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//////////////////Some necessary query//////////////////////////////////////
+
+//SELECT  DISTINCT p.profile_id, p.person_id, p.seat_id as pSeat_id, e.seat_id as cSeat_id, e.id as candidateId   FROM person2profile p, election_candidates e WHERE p.profile_type="EFFIDEVIT" AND p.person_id=e.person_id AND p.current_election_id=e.current_election_id AND p.current_election_id = 5
+
+
+//find count affidevit against current election
+//SELECT current_election_id, COUNT(id) as totalEffidevit FROM `person2profile` WHERE `profile_type`="EFFIDEVIT" GROUP BY current_election_id
+
+
+
+
+
+
+//finding duplicate election candidate for same current election and person
+//SELECT p.profile_id, COUNT(p.profile_id) as total FROM person2profile p, election_candidates e WHERE p.profile_type="EFFIDEVIT" AND p.person_id=e.person_id AND p.current_election_id=e.current_election_id AND p.current_election_id = 5 GROUP BY p.profile_id
+
+//pic one which have atleast 2
+//SELECT * FROM `person2profile` WHERE `profile_id`=140 AND `profile_type`= "EFFIDEVIT"
+
+//
+//SELECT * FROM `election_candidates` WHERE `person_id`=631 AND `current_election_id`=5 ORDER BY `person_id` DESC
+
+
+//{ profile_id: 1124,
+//  person_id: 152,
+//  pSeat_id: 34,
+//  cSeat_id: '34',
+//  candidateId: 147 },
