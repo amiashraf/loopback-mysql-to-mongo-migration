@@ -135,12 +135,13 @@
 
 
 
-
-
     "candidateNameBnAF": {
       "type": "string"
     },
     "fatherHusbandNameBnAF": {
+      "type": "string"
+    },
+    "motherNameBnAF": {
       "type": "string"
     },
     "addressBnAF": {
@@ -188,6 +189,7 @@
     "dateAF": {
       "type": "date"
     },
+
     "assetMaterialAF": {
       "type": "array"
     },
@@ -226,7 +228,7 @@
     "criminalCourtStatusBnAF": {
       "type": "string"
     },
-    "presentCriminalCourtStatusAF": {
+    "criminalCourtStatusAF": {
       "type": "boolean"
     },
     "pastCriminalCourtStatusBnAF": {
@@ -238,8 +240,14 @@
     "lawPresentAF": {
       "type": "array"
     },
+    "lawPresentCountAF": {
+      "type": "number"
+    },
     "lawPastAF": {
       "type": "array"
+    },
+    "lawPastCountAF": {
+      "type": "number"
     },
 
     "isPastMpAF": {
@@ -256,21 +264,23 @@
       "type": "date"
     },
     "createdByAF": {
-      "type": "date"
+      "type": "string"
+    },
+    "createdByBnAF": {
+      "type": "string"
     },
     "modifiedAF": {
       "type": "date"
     },
     "modifiedByAF": {
-      "type": "date"
+      "type": "string"
     },
-    "isPublishedAF": {
-      "type": "boolean"
+    "modifiedByBnAF": {
+      "type": "string"
+    },
+    "publishStatusAF": {
+      "type": "string"
     }
-
-
-
-
 
 
   },
