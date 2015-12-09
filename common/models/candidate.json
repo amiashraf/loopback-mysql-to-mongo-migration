@@ -211,6 +211,9 @@
     "totalDependentIncomeAF": {
       "type": "number"
     },
+    "grandTotalIncomeAF": {
+      "type": "number"
+    },
 
     "liabilitiesDetailsBnAF": {
       "type": "string"

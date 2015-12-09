@@ -319,7 +319,7 @@ function IsNumeric(input)
 ////////////////////////////////////////MERGE AFFIDEVIT income section //////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-oldds.connector.query("SELECT profile_id, COUNT(id) as cnt FROM `effidevit_loans_section` group by profile_id limit 2950, 150",'',function(err,rows,fields) {
+oldds.connector.query("SELECT profile_id, COUNT(id) FROM effidevit_income_section group by profile_id limit 200, 150",'',function(err,rows,fields) {
   if(err){
     console.log(err);
     throw err;
@@ -332,7 +332,7 @@ oldds.connector.query("SELECT profile_id, COUNT(id) as cnt FROM `effidevit_loans
   if(rows.length){
     rows.forEach(function(eachRow){
       console.log("working with profile_id: ",eachRow.profile_id," length: ",eachRow.cnt);
-      oldds.connector.query("SELECT * FROM `effidevit_loans_section` where profile_id="+eachRow.profile_id,'',function(err22,rows2,fields) {
+      oldds.connector.query("SELECT * FROM `effidevit_income_section` where profile_id="+eachRow.profile_id,'',function(err22,rows2,fields) {
 
         if(err22){
           console.log("-------------------",err22);
@@ -343,17 +343,43 @@ oldds.connector.query("SELECT profile_id, COUNT(id) as cnt FROM `effidevit_loans
 
 
         if(profilesLen){
-          var loanAF = [];
-          var totalLoan=0;
+          var incomeAF = [];
+          var totalOwnIncome=0;
+          var totalDependentIncome=0;
           for(var i=0;i<profilesLen;i++){
-            loanAF.push({loanType:rows2[i].loan_type, bankOrganization:rows2[i].bank_organization, loanAmount:rows2[i].loan_amount, debitedLoanAmount:rows2[i].debited_loan_amount, extendedLastDate:rows2[i].extended_last_date});
-            if(IsNumeric(rows2[i].loan_amount))
-              totalLoan+= Number(rows2[i].loan_amount);
+            var incoDet = {};
+
+            incoDet.type = rows2[i].income_source;
+            if(rows2[i].yearly_income && IsNumeric(rows2[i].yearly_income) && Number(rows2[i].yearly_income)){
+              incoDet.own = Number(rows2[i].yearly_income);
+              totalOwnIncome+= Number(rows2[i].yearly_income);
+            }
+            if(rows2[i].dependants_yearly_income && IsNumeric(rows2[i].dependants_yearly_income) && Number(rows2[i].dependants_yearly_income)){
+              incoDet.dependents = rows2[i].dependants_yearly_income;
+              totalDependentIncome+= Number(rows2[i].dependants_yearly_income);
+            }
+
+            incomeAF.push(incoDet);
+
           }
 
+          var tG=0;
           var candidateAffidevit={};
-          candidateAffidevit.totalLoanAF = totalLoan;
-          candidateAffidevit.loanAF = loanAF;
+          if(totalOwnIncome){
+            //console.log("aise own");
+            candidateAffidevit.totalOwnIncomeAF = totalOwnIncome;
+            tG+=totalOwnIncome;
+          }
+          if(totalDependentIncome){
+            //console.log("aise dependent");
+            candidateAffidevit.totalDependentIncomeAF = totalDependentIncome;
+            tG+=totalDependentIncome;
+          }
+          candidateAffidevit.grandTotalIncomeAF=0;
+          if(tG)
+            candidateAffidevit.grandTotalIncomeAF = tG;
+
+          candidateAffidevit.incomeSourceAF = incomeAF;
 
           //console.log(candidateAffidevit);
 
