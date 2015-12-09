@@ -190,18 +190,51 @@
       "type": "date"
     },
 
+
     "assetMaterialAF": {
       "type": "array"
+    },
+    "assetMaterialOwnTotalAF": {
+      "type": "number"
+    },
+    "assetMaterialHusbandWifeTotalAF": {
+      "type": "number"
+    },
+    "assetMaterialDependantsTotalAF": {
+      "type": "number"
     },
     "assetMaterialTotalAF": {
       "type": "number"
     },
+
+
     "assetImmaterialAF": {
       "type": "array"
+    },
+    "assetImmaterialOwnTotalAF": {
+      "type": "number"
+    },
+    "assetImmaterialHusbandWifeTotalAF": {
+      "type": "number"
+    },
+    "assetImmaterialDependantsTotalAF": {
+      "type": "number"
+    },
+    "assetJointOwnershipTotalAF": {
+      "type": "number"
+    },
+    "assetJointSharePartTotalAF": {
+      "type": "number"
     },
     "assetImmaterialTotalAF": {
       "type": "number"
     },
+
+    "assetGrandTotalAF": {
+      "type": "number"
+    },
+
+
     "incomeSourceAF": {
       "type": "array"
     },

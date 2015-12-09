@@ -315,11 +315,95 @@ function IsNumeric(input)
 //});
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////MERGE AFFIDEVIT income section //////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//oldds.connector.query("SELECT profile_id, COUNT(id) as cnt FROM effidevit_income_section group by profile_id limit 18000, 500",'',function(err,rows,fields) {
+//  if(err){
+//    console.log(err);
+//    throw err;
+//  }
+//
+//  console.log(rows.length);
+//  //console.log(rows);
+//
+//  var iter=1;
+//  if(rows.length){
+//    rows.forEach(function(eachRow){
+//      console.log("working with profile_id: ",eachRow.profile_id," length: ",eachRow.cnt);
+//      oldds.connector.query("SELECT * FROM `effidevit_income_section` where profile_id="+eachRow.profile_id,'',function(err22,rows2,fields) {
+//
+//        if(err22){
+//          console.log("-------------------",err22);
+//          throw err22;
+//        }
+//
+//        var profilesLen = rows2.length;
+//
+//
+//        if(profilesLen){
+//          var incomeAF = [];
+//          var totalOwnIncome=0;
+//          var totalDependentIncome=0;
+//          for(var i=0;i<profilesLen;i++){
+//            var incoDet = {};
+//
+//            incoDet.type = rows2[i].income_source;
+//            if(rows2[i].yearly_income && IsNumeric(rows2[i].yearly_income) && Number(rows2[i].yearly_income)){
+//              incoDet.own = Number(rows2[i].yearly_income);
+//              totalOwnIncome+= Number(rows2[i].yearly_income);
+//            }
+//            if(rows2[i].dependants_yearly_income && IsNumeric(rows2[i].dependants_yearly_income) && Number(rows2[i].dependants_yearly_income)){
+//              incoDet.dependents = rows2[i].dependants_yearly_income;
+//              totalDependentIncome+= Number(rows2[i].dependants_yearly_income);
+//            }
+//
+//            incomeAF.push(incoDet);
+//
+//          }
+//
+//          var tG=0;
+//          var candidateAffidevit={};
+//          if(totalOwnIncome){
+//            //console.log("aise own");
+//            candidateAffidevit.totalOwnIncomeAF = totalOwnIncome;
+//            tG+=totalOwnIncome;
+//          }
+//          if(totalDependentIncome){
+//            //console.log("aise dependent");
+//            candidateAffidevit.totalDependentIncomeAF = totalDependentIncome;
+//            tG+=totalDependentIncome;
+//          }
+//          candidateAffidevit.grandTotalIncomeAF=0;
+//          if(tG)
+//            candidateAffidevit.grandTotalIncomeAF = tG;
+//
+//          candidateAffidevit.incomeSourceAF = incomeAF;
+//
+//          //console.log(candidateAffidevit);
+//
+//          app.models.candidate.updateAll({oldAffidevitId: eachRow.profile_id}, candidateAffidevit, function(errr, info) {
+//            if(errr)
+//              throw errr;
+//
+//            console.log(info, iter++);
+//          });
+//        }
+//      });
+//    })
+//  }
+//
+//
+//  //oldds.disconnect();
+//});
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////MERGE AFFIDEVIT income section //////////////////////////////////
+////////////////////////////////////////MERGE AFFIDEVIT assets section //////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-oldds.connector.query("SELECT profile_id, COUNT(id) FROM effidevit_income_section group by profile_id limit 200, 150",'',function(err,rows,fields) {
+oldds.connector.query("SELECT profile_id, COUNT(id) as cnt FROM effidevit_liabilities_section group by profile_id limit 19500, 500",'',function(err,rows,fields) {
   if(err){
     console.log(err);
     throw err;
@@ -332,7 +416,7 @@ oldds.connector.query("SELECT profile_id, COUNT(id) FROM effidevit_income_sectio
   if(rows.length){
     rows.forEach(function(eachRow){
       console.log("working with profile_id: ",eachRow.profile_id," length: ",eachRow.cnt);
-      oldds.connector.query("SELECT * FROM `effidevit_income_section` where profile_id="+eachRow.profile_id,'',function(err22,rows2,fields) {
+      oldds.connector.query("SELECT * FROM `effidevit_liabilities_section` where profile_id="+eachRow.profile_id,'',function(err22,rows2,fields) {
 
         if(err22){
           console.log("-------------------",err22);
@@ -343,43 +427,156 @@ oldds.connector.query("SELECT profile_id, COUNT(id) FROM effidevit_income_sectio
 
 
         if(profilesLen){
-          var incomeAF = [];
-          var totalOwnIncome=0;
-          var totalDependentIncome=0;
+          var assetMaterialAF = [];
+          var assetMaterialOwnTotalAF=0;
+          var assetMaterialHusbandWifeTotalAF=0;
+          var assetMaterialDependantsTotalAF=0;
+          var assetMaterialTotalAF=0;
+
+
+          var assetImmaterialAF = [];
+          var assetImmaterialOwnTotalAF=0;
+          var assetImmaterialHusbandWifeTotalAF=0;
+          var assetImmaterialDependantsTotalAF=0;
+          var assetJointOwnershipTotalAF=0;
+          var assetJointSharePartTotalAF=0;
+          var assetImmaterialTotalAF=0;
+
+
+          var assetGrandTotalAF=0;
+
           for(var i=0;i<profilesLen;i++){
-            var incoDet = {};
 
-            incoDet.type = rows2[i].income_source;
-            if(rows2[i].yearly_income && IsNumeric(rows2[i].yearly_income) && Number(rows2[i].yearly_income)){
-              incoDet.own = Number(rows2[i].yearly_income);
-              totalOwnIncome+= Number(rows2[i].yearly_income);
+            if(rows2[i].asset_type == "material"){
+
+              var matAsset = {};
+              matAsset.type = rows2[i].liabilities_type;
+              if(rows2[i].amount_own && IsNumeric(rows2[i].amount_own) && Number(rows2[i].amount_own)){
+                matAsset.priceOwn = Number(rows2[i].amount_own);
+                assetMaterialOwnTotalAF+= Number(rows2[i].amount_own);
+              }else if(isNaN(rows2[i].amount_own)){
+                matAsset.amountOwn = rows2[i].amount_own;
+              }
+
+              if(rows2[i].amount_husband_wife && IsNumeric(rows2[i].amount_husband_wife) && Number(rows2[i].amount_husband_wife)){
+                matAsset.priceHusbandWife = rows2[i].amount_husband_wife;
+                assetMaterialHusbandWifeTotalAF+= Number(rows2[i].amount_husband_wife);
+              }else if(isNaN(rows2[i].amount_husband_wife)){
+                matAsset.amountHusbandWife = rows2[i].amount_husband_wife;
+              }
+
+              if(rows2[i].amount_dependants && IsNumeric(rows2[i].amount_dependants) && Number(rows2[i].amount_dependants)){
+                matAsset.priceDependants = rows2[i].amount_dependants;
+                assetMaterialDependantsTotalAF+= Number(rows2[i].amount_dependants);
+              }else if(isNaN(rows2[i].amount_dependants)){
+                matAsset.amountDependants = rows2[i].amount_dependants;
+              }
+
+              assetMaterialAF.push(matAsset);
+
             }
-            if(rows2[i].dependants_yearly_income && IsNumeric(rows2[i].dependants_yearly_income) && Number(rows2[i].dependants_yearly_income)){
-              incoDet.dependents = rows2[i].dependants_yearly_income;
-              totalDependentIncome+= Number(rows2[i].dependants_yearly_income);
+            if(rows2[i].asset_type == "immaterial"){
+
+              var iMatAsset = {};
+              iMatAsset.type = rows2[i].immaterial_liabilities;
+              if(rows2[i].amount_own && IsNumeric(rows2[i].amount_own) && Number(rows2[i].amount_own)){
+                iMatAsset.priceOwn = Number(rows2[i].amount_own);
+                assetImmaterialOwnTotalAF += Number(rows2[i].amount_own);
+              }else if(isNaN(rows2[i].amount_own)){
+                iMatAsset.amountOwn = rows2[i].amount_own;
+              }
+
+              if(rows2[i].amount_husband_wife && IsNumeric(rows2[i].amount_husband_wife) && Number(rows2[i].amount_husband_wife)){
+                iMatAsset.priceHusbandWife = rows2[i].amount_husband_wife;
+                assetImmaterialHusbandWifeTotalAF += Number(rows2[i].amount_husband_wife);
+              }else if(isNaN(rows2[i].amount_husband_wife)){
+                iMatAsset.amountHusbandWife = rows2[i].amount_husband_wife;
+              }
+
+              if(rows2[i].amount_dependants && IsNumeric(rows2[i].amount_dependants) && Number(rows2[i].amount_dependants)){
+                iMatAsset.priceDependants = rows2[i].amount_dependants;
+                assetImmaterialDependantsTotalAF+= Number(rows2[i].amount_dependants);
+              }else if(isNaN(rows2[i].amount_dependants)){
+                iMatAsset.amountDependants = rows2[i].amount_dependants;
+              }
+
+              if(rows2[i].joint_ownership && IsNumeric(rows2[i].joint_ownership) && Number(rows2[i].joint_ownership)){
+                iMatAsset.priceJointOwnership = rows2[i].joint_ownership;
+                assetJointOwnershipTotalAF+= Number(rows2[i].joint_ownership);
+              }else if(isNaN(rows2[i].joint_ownership)){
+                iMatAsset.amountJointOwnership = rows2[i].joint_ownership;
+              }
+
+              if(rows2[i].joint_share_part && IsNumeric(rows2[i].joint_share_part) && Number(rows2[i].joint_share_part)){
+                iMatAsset.priceJointSharePart = rows2[i].joint_share_part;
+                assetJointSharePartTotalAF+= Number(rows2[i].joint_share_part);
+              }else if(isNaN(rows2[i].joint_share_part)){
+                iMatAsset.amountJointSharePart = rows2[i].joint_share_part;
+              }
+
+              assetImmaterialAF.push(iMatAsset);
+
             }
 
-            incomeAF.push(incoDet);
 
           }
 
-          var tG=0;
           var candidateAffidevit={};
-          if(totalOwnIncome){
-            //console.log("aise own");
-            candidateAffidevit.totalOwnIncomeAF = totalOwnIncome;
-            tG+=totalOwnIncome;
-          }
-          if(totalDependentIncome){
-            //console.log("aise dependent");
-            candidateAffidevit.totalDependentIncomeAF = totalDependentIncome;
-            tG+=totalDependentIncome;
-          }
-          candidateAffidevit.grandTotalIncomeAF=0;
-          if(tG)
-            candidateAffidevit.grandTotalIncomeAF = tG;
 
-          candidateAffidevit.incomeSourceAF = incomeAF;
+
+          if(assetMaterialOwnTotalAF){
+            candidateAffidevit.assetMaterialOwnTotalAF=assetMaterialOwnTotalAF;
+            assetMaterialTotalAF+=assetMaterialOwnTotalAF;
+          }
+          if(assetMaterialHusbandWifeTotalAF){
+            candidateAffidevit.assetMaterialHusbandWifeTotalAF=assetMaterialHusbandWifeTotalAF;
+            assetMaterialTotalAF+=assetMaterialHusbandWifeTotalAF;
+          }
+          if(assetMaterialDependantsTotalAF){
+            candidateAffidevit.assetMaterialDependantsTotalAF=assetMaterialDependantsTotalAF;
+            assetMaterialTotalAF+=assetMaterialDependantsTotalAF;
+          }
+
+
+          if(assetImmaterialOwnTotalAF){
+            candidateAffidevit.assetImmaterialOwnTotalAF=assetImmaterialOwnTotalAF;
+            assetImmaterialTotalAF+=assetImmaterialOwnTotalAF;
+          }
+          if(assetImmaterialHusbandWifeTotalAF){
+            candidateAffidevit.assetImmaterialHusbandWifeTotalAF=assetImmaterialHusbandWifeTotalAF;
+            assetImmaterialTotalAF+=assetImmaterialHusbandWifeTotalAF;
+          }
+          if(assetImmaterialDependantsTotalAF){
+            candidateAffidevit.assetImmaterialDependantsTotalAF=assetImmaterialDependantsTotalAF;
+            assetImmaterialTotalAF+=assetImmaterialDependantsTotalAF;
+          }
+          if(assetJointOwnershipTotalAF){
+            candidateAffidevit.assetJointOwnershipTotalAF=assetJointOwnershipTotalAF;
+            assetImmaterialTotalAF+=assetJointOwnershipTotalAF;
+          }
+          if(assetJointSharePartTotalAF){
+            candidateAffidevit.assetJointSharePartTotalAF=assetJointSharePartTotalAF;
+            assetImmaterialTotalAF+=assetJointSharePartTotalAF;
+          }
+
+
+          if(assetMaterialTotalAF){
+            //console.log("aise own");
+            candidateAffidevit.assetMaterialTotalAF = assetMaterialTotalAF;
+            assetGrandTotalAF+=assetMaterialTotalAF;
+          }
+          if(assetImmaterialTotalAF){
+            //console.log("aise dependent");
+            candidateAffidevit.assetImmaterialTotalAF = assetImmaterialTotalAF;
+            assetGrandTotalAF+=assetImmaterialTotalAF;
+          }
+
+          candidateAffidevit.assetGrandTotalAF=0;
+          if(assetGrandTotalAF)
+            candidateAffidevit.assetGrandTotalAF = assetGrandTotalAF;
+
+          candidateAffidevit.assetMaterialAF = assetMaterialAF;
+          candidateAffidevit.assetImmaterialAF = assetImmaterialAF;
 
           //console.log(candidateAffidevit);
 
@@ -399,32 +596,35 @@ oldds.connector.query("SELECT profile_id, COUNT(id) FROM effidevit_income_sectio
 });
 
 
-
-
-
-//{ lawPresentAF:
-//  [ { whichLaw: '১৬৮/৪০৯/১০৯ দঃ বিঃ এবং ১৯৪৭ সালের দুর্নীতি প্রতিরোধ আইঃ ৫(২) ধারা',
-//    whichCourt: 'খুলনা বিভাগীয় স্পেশাল দায়রা জজ আদালত',
-//    courtFileNo: 'স্পেশাল-১৬/০৪',
-//    currentStatusResult: 'বিচারাধীন' },
-//    { whichLaw: '১৬৮/৪০৯/১০৯ দঃ বিঃ এবং ১৯৪৭ সালের দুর্নীতি প্রতিরোধ আইঃ ৫(২) ধারা',
-//      whichCourt: 'খুলনা বিভাগীয় স্পেশাল দায়রা জজ আদালত',
-//      courtFileNo: 'স্পেশাল-১৫/০৪',
-//      currentStatusResult: 'বিচারাধীন' },
-//    { whichLaw: '১৬৮/৪০৯/১০৯ দঃ বিঃ এবং ১৯৪৭ সালের দুর্নীতি প্রতিরোধ আইঃ ৫(২) ধারা',
-//      whichCourt: 'খুলনা বিভাগীয় স্পেশাল দায়রা জজ আদালত',
-//      courtFileNo: 'স্পেশাল-১৪/০৪',
-//      currentStatusResult: 'বিচারাধীন' } ],
-//    lawPastAF:
-//  [ { whichLaw: '৩০২/৩৪ দঃ বিঃ',
-//    whichCourt: 'সাবেক নালিশী আদালত ক \'অঞ্চল\' খুলনা',
-//    courtFileNo: 'রূপসার থানার মামলা নং-২২ জি আর ১১/০২',
-//    currentStatusResult: '' },
-//    { whichLaw: '৩০২/১২০(খ)/৩৪ দঃ বিঃ',
-//      whichCourt: 'সাবেক নালিশী আদালত ‌\'খ\' অঞ্চল, খুলনা',
-//      courtFileNo: 'বটিয়াঘাটা থানার মামলা নং-১৫ জি আর ৬০/০২',
-//      currentStatusResult: '' },
-//    { whichLaw: '৩০২/৩৪ দঃ বিঃ',
-//      whichCourt: 'মুখ্য মহানগর হাকিম আদালত, খুলনা',
-//      courtFileNo: 'খুলনা থানার মামলা নং-৩৪ জি আর -৩৫/০২',
-//      currentStatusResult: '' } ] }
+//
+//"assetMaterialAF:[
+//{type:""cashTaka"", amountOwn:"""",priceOwn:"""", amountHusbandWife:"""",priceHusbandWife:"""", amountDependants:"""", priceDependants:""""},
+//{type:""foreignCurrency"",  amountOwn:"""",priceOwn:"""", amountHusbandWife:"""",priceHusbandWife:"""", amountDependants:"""", priceDependants:""""},
+//{type:""bankDeposit"",  amountOwn:"""",priceOwn:"""", amountHusbandWife:"""",priceHusbandWife:"""", amountDependants:"""", priceDependants:""""},
+//{type:""allShares"",  amountOwn:"""",priceOwn:"""", amountHusbandWife:"""",priceHusbandWife:"""", amountDependants:"""", priceDependants:""""},
+//{type:""dps"",  amountOwn:"""",priceOwn:"""", amountHusbandWife:"""",priceHusbandWife:"""", amountDependants:"""", priceDependants:""""},
+//{type:""vehicles"",  amountOwn:"""",priceOwn:"""", amountHusbandWife:"""",priceHusbandWife:"""", amountDependants:"""", priceDependants:""""},
+//{type:""goldOrnaments"",  amountOwn:"""",priceOwn:"""", amountHusbandWife:"""",priceHusbandWife:"""", amountDependants:"""", priceDependants:""""},
+//{type:""electronicGoods"",  amountOwn:"""",priceOwn:"""", amountHusbandWife:"""",priceHusbandWife:"""", amountDependants:"""", priceDependants:""""},
+//{type:""furnitures"",  amountOwn:"""",priceOwn:"""", amountHusbandWife:"""",priceHusbandWife:"""", amountDependants:"""", priceDependants:""""},
+//{type:""others"",  amountOwn:"""",priceOwn:"""", amountHusbandWife:"""",priceHusbandWife:"""", amountDependants:"""", priceDependants:""""},
+//]"
+//assetMaterialOwnTotalAF
+//assetMaterialHusbandWifeTotalAF
+//assetMaterialDependantsTotalAF
+//assetMaterialTotalAF
+//"assetImmaterial:[
+//{type:""cultivatedLand"", amountOwn:"""", priceOwn:"""", amountHusbandWife:"""", priceHusbandWife:"""", amountDependants:"""", priceDependants:"""", amountJointOwnership:"""", priceJointOwnership:"""", amountJointSharePart:"""", priceJointSharePart:""""},
+//{type:""noncultivatedLand"", amountOwn:"""", priceOwn:"""", amountHusbandWife:"""", priceHusbandWife:"""", amountDependants:"""", priceDependants:"""", amountJointOwnership:"""", priceJointOwnership:"""", amountJointSharePart:"""", priceJointSharePart:""""},
+//{type:""building"", amountOwn:"""", priceOwn:"""", amountHusbandWife:"""", priceHusbandWife:"""", amountDependants:"""", priceDependants:"""", amountJointOwnership:"""", priceJointOwnership:"""", amountJointSharePart:"""", priceJointSharePart:""""},
+//{type:""house_apartment"", amountOwn:"""", priceOwn:"""", amountHusbandWife:"""", priceHusbandWife:"""", amountDependants:"""", priceDependants:"""", amountJointOwnership:"""", priceJointOwnership:"""", amountJointSharePart:"""", priceJointSharePart:""""},
+//{type:""gardenFarm"", amountOwn:"""", priceOwn:"""", amountHusbandWife:"""", priceHusbandWife:"""", amountDependants:"""", priceDependants:"""", amountJointOwnership:"""", priceJointOwnership:"""", amountJointSharePart:"""", priceJointSharePart:""""},
+//{type:""others"", amountOwn:"""", priceOwn:"""", amountHusbandWife:"""", priceHusbandWife:"""", amountDependants:"""", priceDependants:"""", amountJointOwnership:"""", priceJointOwnership:"""", amountJointSharePart:"""", priceJointSharePart:""""},
+//]"
+//assetImmaterialOwnTotalAF
+//assetImmaterialHusbandWifeTotalAF
+//assetImmaterialDependantsTotalAF
+//assetJointOwnershipTotalAF
+//assetJointSharePartTotalAF
+//assetImmaterialTotalAF
+//assetGrandTotalAF
