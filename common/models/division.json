@@ -47,6 +47,11 @@
       "type": "hasMany",
       "model": "electionSeat",
       "foreignKey": "divisionId"
+    },
+    "seats": {
+      "type": "hasMany",
+      "model": "seat",
+      "foreignKey": "divisionId"
     }
   },
   "acls": [],

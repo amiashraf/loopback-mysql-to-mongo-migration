@@ -58,9 +58,9 @@
       "model": "electionSeat",
       "foreignKey": "currentElectionId"
     },
-    "candidatePosts": {
+    "electionCandidatePosts": {
       "type": "hasMany",
-      "model": "candidatePost",
+      "model": "electionCandidatePost",
       "foreignKey": "currentElectionId"
     }
   },

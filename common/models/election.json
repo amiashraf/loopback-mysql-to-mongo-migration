@@ -26,6 +26,9 @@
     "electionType": {
       "type": "string"
     },
+    "seatZone": {
+      "type": "array"
+    },
     "created": {
       "type": "date"
     },
@@ -44,11 +47,6 @@
   },
   "validations": [],
   "relations": {
-    "candidatePosts": {
-      "type": "hasMany",
-      "model": "candidatePost",
-      "foreignKey": "electionId"
-    },
     "electionSeats": {
       "type": "hasMany",
       "model": "electionSeat",
@@ -57,6 +55,16 @@
     "currentElections": {
       "type": "hasMany",
       "model": "currentElection",
+      "foreignKey": "electionId"
+    },
+    "candidatePosts": {
+      "type": "hasMany",
+      "model": "candidatePost",
+      "foreignKey": "electionId"
+    },
+    "seats": {
+      "type": "hasMany",
+      "model": "seat",
       "foreignKey": "electionId"
     }
   },

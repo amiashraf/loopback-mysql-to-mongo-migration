@@ -130,11 +130,6 @@
     "isPublished": {
       "type": "boolean"
     },
-
-
-
-
-
     "candidateNameBnAF": {
       "type": "string"
     },
@@ -189,8 +184,6 @@
     "dateAF": {
       "type": "date"
     },
-
-
     "assetMaterialAF": {
       "type": "array"
     },
@@ -206,8 +199,6 @@
     "assetMaterialTotalAF": {
       "type": "number"
     },
-
-
     "assetImmaterialAF": {
       "type": "array"
     },
@@ -229,12 +220,9 @@
     "assetImmaterialTotalAF": {
       "type": "number"
     },
-
     "assetGrandTotalAF": {
       "type": "number"
     },
-
-
     "incomeSourceAF": {
       "type": "array"
     },
@@ -247,7 +235,6 @@
     "grandTotalIncomeAF": {
       "type": "number"
     },
-
     "liabilitiesDetailsBnAF": {
       "type": "string"
     },
@@ -260,7 +247,6 @@
     "loanAF": {
       "type": "array"
     },
-
     "criminalCourtStatusBnAF": {
       "type": "string"
     },
@@ -285,7 +271,6 @@
     "lawPastCountAF": {
       "type": "number"
     },
-
     "isPastMpAF": {
       "type": "boolean"
     },
@@ -295,7 +280,6 @@
     "achievementWhileMpAF": {
       "type": "array"
     },
-
     "createdAF": {
       "type": "date"
     },
@@ -317,8 +301,6 @@
     "publishStatusAF": {
       "type": "string"
     }
-
-
   },
   "validations": [],
   "relations": {

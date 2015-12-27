@@ -50,6 +50,11 @@
       "type": "hasMany",
       "model": "electionSeat",
       "foreignKey": "upazillaId"
+    },
+    "seats": {
+      "type": "hasMany",
+      "model": "seat",
+      "foreignKey": "upazillaId"
     }
   },
   "acls": [],

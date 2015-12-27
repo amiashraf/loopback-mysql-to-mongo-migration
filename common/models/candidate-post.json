@@ -7,16 +7,10 @@
     "validateUpsert": true
   },
   "properties": {
-    "oldId": {
-      "type": "number"
-    },
-    "oldCurrentElectionId": {
-      "type": "number"
-    },
-    "postNameEn": {
+    "postNameBn": {
       "type": "string"
     },
-    "postNameBn": {
+    "postNameEn": {
       "type": "string"
     },
     "postDescResponsibilityBn": {
@@ -28,11 +22,11 @@
     "createdBy": {
       "type": "string"
     },
-    "modifiedBy": {
-      "type": "string"
-    },
     "modified": {
       "type": "date"
+    },
+    "modifiedBy": {
+      "type": "string"
     },
     "isPublished": {
       "type": "boolean"
@@ -45,10 +39,10 @@
       "model": "election",
       "foreignKey": "electionId"
     },
-    "currentElection": {
-      "type": "belongsTo",
-      "model": "currentElection",
-      "foreignKey": "currentElectionId"
+    "electionCandidatePosts": {
+      "type": "hasMany",
+      "model": "electionCandidatePost",
+      "foreignKey": "candidatePostId"
     }
   },
   "acls": [],

@@ -58,6 +58,11 @@
       "type": "hasMany",
       "model": "electionSeat",
       "foreignKey": "districtId"
+    },
+    "seats": {
+      "type": "hasMany",
+      "model": "seat",
+      "foreignKey": "districtId"
     }
   },
   "acls": [],

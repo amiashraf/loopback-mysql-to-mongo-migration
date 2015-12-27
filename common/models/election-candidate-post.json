@@ -1,6 +1,6 @@
 {
-  "name": "politicalParty",
-  "plural": "politicalParties",
+  "name": "electionCandidatePost",
+  "plural": "electionCandidatePosts",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -10,22 +10,16 @@
     "oldId": {
       "type": "number"
     },
-    "partyNameEn": {
+    "oldCurrentElectionId": {
+      "type": "number"
+    },
+    "postNameEn": {
       "type": "string"
     },
-    "partyNameBn": {
+    "postNameBn": {
       "type": "string"
     },
-    "estDate": {
-      "type": "date"
-    },
-    "chairpersonNameBn": {
-      "type": "string"
-    },
-    "gsNameBn": {
-      "type": "string"
-    },
-    "partyConstitutionBn": {
+    "postDescResponsibilityBn": {
       "type": "string"
     },
     "created": {
@@ -46,15 +40,20 @@
   },
   "validations": [],
   "relations": {
-    "peoples": {
-      "type": "hasMany",
-      "model": "person",
-      "foreignKey": "politicalPartyId"
+    "election": {
+      "type": "belongsTo",
+      "model": "election",
+      "foreignKey": "electionId"
     },
-    "candidates": {
-      "type": "hasMany",
-      "model": "candidate",
-      "foreignKey": "politicalPartyId"
+    "currentElection": {
+      "type": "belongsTo",
+      "model": "currentElection",
+      "foreignKey": "currentElectionId"
+    },
+    "candidatePost": {
+      "type": "belongsTo",
+      "model": "candidatePost",
+      "foreignKey": "candidatePostId"
     }
   },
   "acls": [],
