@@ -5,15 +5,15 @@ var ds = app.datasources.votebdmongo;
 var oldds = app.datasources.votebdold;
 
 
-//Step 1: Showing table structure
-oldds.discoverSchema('election_seat_list', {schema: 'votebd_july2015'}, function(err,schema) {
-  if (err) throw err;
-
-  var json = JSON.stringify(schema, null, '  ');
-  console.log(json);
-
-  oldds.disconnect();
-});
+////Step 1: Showing table structure
+//oldds.discoverSchema('election_seat_list', {schema: 'votebd_july2015'}, function(err,schema) {
+//  if (err) throw err;
+//
+//  var json = JSON.stringify(schema, null, '  ');
+//  console.log(json);
+//
+//  oldds.disconnect();
+//});
 
 
 //Step 2: Showing data
@@ -81,31 +81,32 @@ oldds.discoverSchema('election_seat_list', {schema: 'votebd_july2015'}, function
 
 /////////////////////////////////////mapping old id to new object reference id/////////////////////////////////
 
-////now put currentElection objectId to electionSeat(currentElectionId)
-//  app.models.currentElection.find({skip:0,limit:5},function(err, currentElections) {
-//      if (err) throw err;
-//
-//      console.log('Found:', currentElections.length);
-//
-//
-//      //importing to mongo
-//    currentElections.forEach(function(currentElection) {
-//
-//      console.log(currentElection.oldId);
-//      var distr = {};
-//      distr.currentElectionId = currentElection.id;
-//
-//      app.models.electionSeat.updateAll({oldCurrentElectionId: currentElection.oldId}, distr, function(errr, info) {
-//        if(errr)
-//          throw errr;
-//
-//        console.log(info);
-//      });
-//
-//    });
-//
-//      ds.disconnect();
-//    });
+//now put currentElection objectId to electionSeat(currentElectionId)
+  app.models.currentElection.find({skip:30,limit:5},function(err, currentElections) {
+      if (err) throw err;
+
+      console.log('Found:', currentElections.length);
+      //console.log('Found:', currentElections);
+
+
+      //importing to mongo
+    currentElections.forEach(function(currentElection) {
+
+      console.log(currentElection.oldId);
+      var distr = {};
+      distr.currentElectionId = currentElection.id;
+
+      app.models.electionSeat.updateAll({oldCurrentElectionId: currentElection.oldId}, distr, function(errr, info) {
+        if(errr)
+          throw errr;
+
+        console.log(info);
+      });
+
+    });
+
+      //ds.disconnect();
+    });
 
 ////now put division objectId to electionSeat(divisionId)
 //  app.models.division.find(function(err, divisions) {
