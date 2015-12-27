@@ -81,32 +81,32 @@ var oldds = app.datasources.votebdold;
 
 /////////////////////////////////////mapping old id to new object reference id/////////////////////////////////
 
-//now put currentElection objectId to electionSeat(currentElectionId)
-  app.models.currentElection.find({skip:30,limit:5},function(err, currentElections) {
-      if (err) throw err;
-
-      console.log('Found:', currentElections.length);
-      //console.log('Found:', currentElections);
-
-
-      //importing to mongo
-    currentElections.forEach(function(currentElection) {
-
-      console.log(currentElection.oldId);
-      var distr = {};
-      distr.currentElectionId = currentElection.id;
-
-      app.models.electionSeat.updateAll({oldCurrentElectionId: currentElection.oldId}, distr, function(errr, info) {
-        if(errr)
-          throw errr;
-
-        console.log(info);
-      });
-
-    });
-
-      //ds.disconnect();
-    });
+////now put currentElection objectId to electionSeat(currentElectionId)
+//  app.models.currentElection.find({skip:30,limit:5},function(err, currentElections) {
+//      if (err) throw err;
+//
+//      console.log('Found:', currentElections.length);
+//      //console.log('Found:', currentElections);
+//
+//
+//      //importing to mongo
+//    currentElections.forEach(function(currentElection) {
+//
+//      console.log(currentElection.oldId);
+//      var distr = {};
+//      distr.currentElectionId = currentElection.id;
+//
+//      app.models.electionSeat.updateAll({oldCurrentElectionId: currentElection.oldId}, distr, function(errr, info) {
+//        if(errr)
+//          throw errr;
+//
+//        console.log(info);
+//      });
+//
+//    });
+//
+//      //ds.disconnect();
+//    });
 
 ////now put division objectId to electionSeat(divisionId)
 //  app.models.division.find(function(err, divisions) {
